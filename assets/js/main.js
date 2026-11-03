@@ -1,8 +1,10 @@
-/* Namuna One — minimal, vanilla JS. No dependencies. */
+/* Namuna One — minimal, vanilla JS. No dependencies.
+   Features: sticky header, mobile menu, scrollspy, copy-to-clipboard,
+   footer year. All progressive: the page is fully usable without JS. */
 (function () {
   'use strict';
 
-  /* Sticky header hairline on scroll */
+  /* ── Sticky header hairline ─────────────────────────────────────────── */
   var header = document.querySelector('.site-header');
   function onScroll() {
     if (!header) return;
@@ -11,8 +13,12 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  /* Mobile menu */
+  /* ── Mobile menu ────────────────────────────────────────────────────── */
   var toggle = document.querySelector('.nav-toggle');
+  function closeMenu() {
+    document.body.classList.remove('menu-open');
+    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+  }
   if (toggle) {
     toggle.addEventListener('click', function () {
       var open = document.body.classList.toggle('menu-open');
@@ -22,26 +28,69 @@
       if (document.body.classList.contains('menu-open') &&
           !e.target.closest('.mobile-menu') &&
           !e.target.closest('.nav-toggle')) {
-        document.body.classList.remove('menu-open');
-        toggle.setAttribute('aria-expanded', 'false');
+        closeMenu();
       }
     });
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && document.body.classList.contains('menu-open')) {
-        document.body.classList.remove('menu-open');
-        toggle.setAttribute('aria-expanded', 'false');
+        closeMenu();
         toggle.focus();
       }
     });
     document.querySelectorAll('.mobile-menu a').forEach(function (a) {
-      a.addEventListener('click', function () {
-        document.body.classList.remove('menu-open');
-        toggle.setAttribute('aria-expanded', 'false');
-      });
+      a.addEventListener('click', closeMenu);
     });
   }
 
-  /* Copy-to-clipboard for install commands */
+  /* ── Scrollspy — highlight the section you're reading ───────────────── */
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-links a[href^="#"]'));
+  var sections = navLinks.map(function (link) {
+    return document.querySelector(link.getAttribute('href'));
+  }).filter(Boolean);
+
+  if (sections.length) {
+    var currentId = null;
+
+    function updateSpy() {
+      var probe = window.scrollY + 110; /* clear the sticky header */
+      var next = null;
+      sections.forEach(function (section) {
+        if (section.offsetTop <= probe) next = section.id;
+      });
+      var atBottom = window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 2;
+      if (atBottom) next = sections[sections.length - 1].id;
+
+      if (next === currentId) return;
+      currentId = next;
+      navLinks.forEach(function (link) {
+        var target = link.getAttribute('href').slice(1);
+        if (next && target === next) link.setAttribute('aria-current', 'true');
+        else link.removeAttribute('aria-current');
+      });
+    }
+
+    var spyTick = false;
+    window.addEventListener('scroll', function () {
+      if (spyTick) return;
+      spyTick = true;
+      window.requestAnimationFrame(function () {
+        spyTick = false;
+        updateSpy();
+      });
+    }, { passive: true });
+    window.addEventListener('resize', updateSpy);
+    updateSpy();
+  }
+
+  /* ── Copy-to-clipboard with announced status ────────────────────────── */
+  var status = document.getElementById('copy-status');
+  function announce(message) {
+    if (!status) return;
+    status.textContent = '';
+    window.setTimeout(function () { status.textContent = message; }, 60);
+  }
+
   document.querySelectorAll('.copy-btn').forEach(function (btn) {
     btn.addEventListener('click', function () {
       var targetId = btn.getAttribute('data-copy-target');
@@ -49,20 +98,18 @@
       var text = target ? target.innerText.trim() : (btn.getAttribute('data-copy') || '');
       if (!text) return;
 
-      function done() {
+      function done(ok) {
         var original = btn.textContent;
-        btn.textContent = 'Copied';
+        btn.textContent = ok ? 'Copied ✓' : 'Copy failed';
         btn.disabled = true;
+        announce(ok ? 'Copied to clipboard.' : 'Copy failed. Select the text manually.');
         window.setTimeout(function () {
           btn.textContent = original;
           btn.disabled = false;
-        }, 1600);
+        }, 1800);
       }
 
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text).then(done).catch(done);
-      } else {
-        /* Fallback for non-secure contexts */
+      function legacyCopy() {
         var ta = document.createElement('textarea');
         ta.value = text;
         ta.setAttribute('readonly', '');
@@ -70,14 +117,24 @@
         ta.style.left = '-9999px';
         document.body.appendChild(ta);
         ta.select();
-        try { document.execCommand('copy'); } catch (_) { /* noop */ }
+        var ok = false;
+        try { ok = document.execCommand('copy'); } catch (_) { ok = false; }
         document.body.removeChild(ta);
-        done();
+        return ok;
+      }
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(
+          function () { done(true); },
+          function () { done(legacyCopy()); }
+        );
+      } else {
+        done(legacyCopy());
       }
     });
   });
 
-  /* Footer year */
+  /* ── Footer year ────────────────────────────────────────────────────── */
   var yearEl = document.getElementById('footer-year');
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 })();

@@ -6,7 +6,10 @@
   <title>Namuna One — Sharing is Caring. · Verified open data for Nepal</title>
   <meta name="description" content="Namuna One is the home of namunaONE — verified, offline-first open data and Dart tools for Nepal: administrative divisions (nepal_admin_api), a Bikram Sambat calendar commons (nMiti), and more. Sharing is caring.">
   <link rel="canonical" href="https://namunaone.github.io/">
-  <meta name="theme-color" content="#0E4D5C">
+  <meta name="theme-color" content="#0E4D5C" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#10171A" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <meta name="author" content="namunaONE">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
@@ -56,6 +59,36 @@
     "description": "Verified open data and offline-first Dart tools for Nepal."
   }
   </script>
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "nepal_admin_api",
+      "alternateName": "nGeo — Nepal Administrative Data",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any (pure Dart)",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "isAccessibleForFree": true,
+      "license": "https://github.com/namunaONE/nGeo/blob/main/LICENSE",
+      "url": "https://pub.dev/packages/nepal_admin_api",
+      "codeRepository": "https://github.com/namunaONE/nGeo"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "nepali_date",
+      "alternateName": "nMiti — Bikram Sambat calendar commons",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any (pure Dart)",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "isAccessibleForFree": true,
+      "license": "https://github.com/namunaONE/nMiti/blob/main/LICENSE",
+      "url": "https://namunaone.github.io/nMiti/",
+      "codeRepository": "https://github.com/namunaONE/nMiti"
+    }
+  ]
+  </script>
 </head>
 
 <body>
@@ -64,7 +97,7 @@
 <!-- ══════════ Header ══════════ -->
 <header class="site-header">
   <nav class="nav" aria-label="Primary">
-    <a class="brand" href="/" aria-label="Namuna One — home">
+    <a class="brand" href="/">
       <svg class="brand-tile" width="34" height="34" viewBox="0 0 64 64" role="img" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
         <rect width="64" height="64" rx="14" fill="#0E4D5C"/>
         <text x="32" y="44" text-anchor="middle" font-family="'Nirmala UI','Noto Serif Devanagari','Mangal',serif" font-size="36" font-weight="700" fill="#F5F4F2">न</text>
@@ -80,7 +113,7 @@
       <li><a href="#links">Links</a></li>
     </ul>
 
-    <a class="btn btn-primary btn-nav" href="https://github.com/namunaONE" rel="noopener">GitHub ↗</a>
+    <a class="btn btn-primary btn-nav" href="https://github.com/namunaONE" rel="me noopener">GitHub ↗</a>
 
     <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
@@ -93,7 +126,7 @@
     <a href="#workshop">The Workshop</a>
     <a href="#about">About</a>
     <a href="#links">Links</a>
-    <a href="https://github.com/namunaONE" rel="noopener">GitHub ↗</a>
+    <a href="https://github.com/namunaONE" rel="me noopener">GitHub ↗</a>
   </div>
 </header>
 
@@ -111,7 +144,7 @@
       </p>
       <div class="cta-row">
         <a class="btn btn-primary" href="#projects">Explore the projects ↓</a>
-        <a class="btn btn-ghost" href="https://github.com/namunaONE" rel="noopener">GitHub ↗</a>
+        <a class="btn btn-ghost" href="https://github.com/namunaONE" rel="me noopener">GitHub ↗</a>
       </div>
       <ul class="trust-row" aria-label="Principles at a glance">
         <li>MIT licensed</li>
@@ -288,7 +321,7 @@
   <!-- ══════════ About / Ethos ══════════ -->
   <section class="section" id="about" aria-labelledby="about-title" style="padding-top:0">
     <p class="eyebrow">About</p>
-    <h2 id="about-title" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">About Namuna One</h2>
+    <h2 id="about-title" class="sr-only">About Namuna One</h2>
 
     <div class="about-grid">
       <aside class="dictionary" aria-label="The name, defined">
@@ -330,7 +363,7 @@
       <h2 id="links-title">Find us</h2>
     </div>
     <ul class="link-list">
-      <li><a class="link-row" href="https://github.com/namunaONE" rel="noopener"><span class="link-name">GitHub</span><span class="link-desc">@namunaONE — all repositories, issues, discussions</span><span class="link-arrow">→</span></a></li>
+      <li><a class="link-row" href="https://github.com/namunaONE" rel="me noopener"><span class="link-name">GitHub</span><span class="link-desc">@namunaONE — all repositories, issues, discussions</span><span class="link-arrow">→</span></a></li>
       <li><a class="link-row" href="https://pub.dev/packages/nepal_admin_api" rel="noopener"><span class="link-name">pub.dev</span><span class="link-desc">nepal_admin_api — install the nGeo dataset as a Dart package</span><span class="link-arrow">→</span></a></li>
       <li><a class="link-row" href="https://github.com/namunaONE/nGeo/tree/main/bindings" rel="noopener"><span class="link-name">Bindings</span><span class="link-desc">JavaScript/TypeScript · Python · CSV · GeoJSON — generated from the same verified dataset</span><span class="link-arrow">→</span></a></li>
       <li><a class="link-row" href="https://namunaone.github.io/nGeo/" rel="noopener"><span class="link-name">Downloads</span><span class="link-desc">local_bodies.csv · districts.csv · provinces.csv · GeoJSON · meta.json</span><span class="link-arrow">→</span></a></li>
@@ -358,7 +391,7 @@
         <p class="footer-tag">Sharing is Caring. — verified open data and offline-first Dart tools for Nepal.</p>
       </div>
       <nav aria-label="Projects">
-        <h4>Projects</h4>
+        <h2>Projects</h2>
         <ul>
           <li><a href="https://namunaone.github.io/nGeo/" rel="noopener">nGeo · nepal_admin_api</a></li>
           <li><a href="https://github.com/namunaONE/nGeo" rel="noopener">nGeo on GitHub</a></li>
@@ -367,9 +400,9 @@
         </ul>
       </nav>
       <nav aria-label="Elsewhere">
-        <h4>Elsewhere</h4>
+        <h2>Elsewhere</h2>
         <ul>
-          <li><a href="https://github.com/namunaONE" rel="noopener">github.com/namunaONE</a></li>
+          <li><a href="https://github.com/namunaONE" rel="me noopener">github.com/namunaONE</a></li>
           <li><a href="https://pub.dev/packages/nepal_admin_api" rel="noopener">pub.dev/nepal_admin_api</a></li>
           <li><a href="/llms.txt">llms.txt</a></li>
         </ul>
@@ -382,6 +415,7 @@
   </div>
 </footer>
 
+<span class="sr-only" role="status" aria-live="polite" id="copy-status"></span>
 <script src="/assets/js/main.js" defer></script>
 </body>
 </html>
