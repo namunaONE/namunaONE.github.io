@@ -10,14 +10,15 @@ Live at **https://namunaone.github.io/**
 A single-page, dependency-free static site. No build step, no framework, no webfonts — just hand-written HTML, CSS and a few lines of vanilla JS. Fresh umbrella identity (Stone + Deep Teal, terracotta accent), distinct from the nGeo/nMiti project brand systems.
 
 ```text
-├── index.html            # The single page: hero · numbers · projects · workshop · about · links
+├── index.html            # Hero · numbers · atlas · projects · workshop · method · about · links
 ├── 404.html              # Not-found page ("this page is not in the dataset")
 ├── assets/
-│   ├── css/style.css     # Design system v1.2 — tokens, dark mode, a11y, print, reveals
+│   ├── css/style.css     # Design system v1.3 — tokens, dark mode, a11y, print, reveals
 │   ├── js/main.js        # Nav, scrollspy, copy + live region, footer year (~120 lines)
 │   ├── favicon.svg       # न tile — used as icon and Organization logo
 │   ├── nepal-mark.svg    # Point map — 753 palikas · 77 districts · 7 provinces (generated)
-│   └── og.svg            # 1200×630 social card (hand-authored SVG)
+│   ├── og.svg            # 1200×630 social card source (hand-authored SVG)
+│   └── og.png            # Rendered social card — referenced by og:image
 ├── STYLEGUIDE.md         # Token + component + voice rules (system of record)
 ├── llms.txt              # Machine-readable index for AI assistants (llms.txt convention)
 ├── robots.txt            # Allow all + sitemap pointer
@@ -63,7 +64,7 @@ No GitHub Actions required — there is nothing to build.
 - **Adaptive theme** — full `prefers-color-scheme: dark` support driven by OS settings, plus `prefers-contrast`, `forced-colors`, reduced-motion and a print stylesheet. No theme toggle by design (system-driven only).
 - **Motion** — hero entrance, pure-CSS scroll-driven reveals (`animation-timeline: view()`), scroll-linked hero parallax (`scroll(root block)`), and a pointer spotlight (masked 1px ring, fine pointers only). All animate `translate`/`opacity`; hover lifts stay independent. Reduced motion disables everything.
 - **Accessibility** — focus-visible rings, 44px targets, skip link, `aria-current` scrollspy, `aria-live` copy status, scoped "verified" labels (never color alone); the spotlight also lights on `:focus-within`.
-- **og:image** is the hand-authored `assets/og.svg`. Some scrapers prefer PNG — render `assets/og.svg` to a 1200×630 PNG and swap the two `og:image` tags when convenient (e.g. via browser screenshot).
+- **og:image** is the raster `assets/og.png` (1200×630), rendered from the hand-authored `assets/og.svg` source with system fonts (`@resvg/resvg-js`, one-off build). Edit the SVG, re-render the PNG.
 - **No frameworks** — edit the HTML directly; there are no partials to sync. Asset URLs carry a `?v=` cache-buster — bump it in `index.html` and `404.html` whenever `style.css`, `main.js` or `nepal-mark.svg` changes.
 - Figures on the page (7/77/753/6,743 · 109 BS years · 548+205) are hand-maintained snapshots from nGeo v2.10.0 and nMiti — update them when the data products version up.
 - Contact is **GitHub-only** by decision. Add a mailto row to the Links section if that changes.
