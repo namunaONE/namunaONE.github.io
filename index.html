@@ -32,7 +32,7 @@
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt">
   <link rel="sitemap" type="application/xml" href="/sitemap.xml">
-  <link rel="stylesheet" href="/assets/css/style.css?v=1.1.0">
+  <link rel="stylesheet" href="/assets/css/style.css?v=1.2.0">
 
   <!-- Structured data -->
   <script type="application/ld+json">
@@ -164,10 +164,10 @@
         <div class="sc-sub">Chitwan · Bagmati · भरतपुर</div>
       </figure>
       <figure class="sample-card sc-b">
-        <span class="sc-tag sc-bs">BS · Today</span>
+        <span class="sc-tag sc-bs">BS · Calendar</span>
         <div class="sc-big" style="font-size:1.15rem">Kartik 17, 2083</div>
-        <div class="sc-line">Bikram Sambat — machine-verified</div>
-        <div class="sc-sub">nMiti · rebuilt every 6h · rolls at 00:00 NPT</div>
+        <div class="sc-line">Bikram Sambat — a verified date</div>
+        <div class="sc-sub">nMiti · 109 verified years · rolls at 00:00 NPT</div>
       </figure>
       <figure class="sample-card sc-c">
         <span class="sc-tag sc-count">Coverage</span>
@@ -182,55 +182,221 @@
   <section class="numbers" aria-label="Nepal in numbers">
     <div class="numbers-inner">
       <div class="numbers-grid">
-        <div class="stat"><div class="stat-num">7</div><div class="stat-label">Provinces</div></div>
-        <div class="stat"><div class="stat-num">77</div><div class="stat-label">Districts</div></div>
-        <div class="stat"><div class="stat-num">753</div><div class="stat-label">Local bodies</div></div>
-        <div class="stat"><div class="stat-num">6,743</div><div class="stat-label">Wards</div></div>
+        <div class="stat"><div class="stat-num">7</div><div class="stat-label">Provinces</div><div class="stat-ne deva" lang="ne">प्रदेश</div></div>
+        <div class="stat"><div class="stat-num">77</div><div class="stat-label">Districts</div><div class="stat-ne deva" lang="ne">जिल्ला</div></div>
+        <div class="stat"><div class="stat-num">753</div><div class="stat-label">Local bodies</div><div class="stat-ne deva" lang="ne">स्थानीय तह</div></div>
+        <div class="stat"><div class="stat-num">6,743</div><div class="stat-label">Wards</div><div class="stat-ne deva" lang="ne">वडा</div></div>
       </div>
       <p class="numbers-caption">Sources: nGeo v2.10.0 (CBS/NSO-coded, gap-declared) · nMiti (109-year verified BS dataset)</p>
     </div>
   </section>
 
+  <!-- ══════════ Atlas — real data, plotted ══════════ -->
+  <section class="section atlas" id="atlas" aria-labelledby="atlas-title">
+    <div class="atlas-panel reveal">
+      <div class="atlas-copy">
+        <p class="eyebrow">01 · The data</p>
+        <h2 id="atlas-title">One dataset.<br>Every district.</h2>
+        <p class="atlas-lede">Every dot below is a real coordinate from the public nGeo GeoJSON bindings — 753 local bodies, 77 district anchors, 7 province rings. Not a decorative map: the same numbers the package ships.</p>
+
+        <dl class="atlas-stats">
+          <div><dd>753</dd><dt>Palikas plotted</dt></div>
+          <div><dd>77</dd><dt>District anchors</dt></div>
+          <div><dd>7</dd><dt>Province rings</dt></div>
+        </dl>
+
+        <div class="atlas-actions">
+          <a class="btn btn-primary" href="https://github.com/namunaONE/nGeo/tree/main/bindings/geojson" rel="noopener">GeoJSON on GitHub ↗</a>
+          <a class="btn btn-ghost" href="https://namunaone.github.io/nGeo/explorer.html" rel="noopener">Data Explorer ↗</a>
+        </div>
+
+        <details class="atlas-list">
+          <summary>Browse all 77 districts</summary>
+          <p class="atlas-note">Generated from <span class="mono">districts.centroids.geojson</span> · nGeo v2.15.0 bindings · CC-BY-4.0 data</p>
+          <div class="district-groups">
+            <div class="district-group">
+              <h3>Koshi <span lang="ne">कोशी प्रदेश</span></h3>
+              <ul>
+              <li><span>Bhojpur</span><span lang="ne">भोजपुर</span></li>
+              <li><span>Dhankuta</span><span lang="ne">धनकुटा</span></li>
+              <li><span>Ilam</span><span lang="ne">इलाम</span></li>
+              <li><span>Jhapa</span><span lang="ne">झापा</span></li>
+              <li><span>Khotang</span><span lang="ne">खोटाङ</span></li>
+              <li><span>Morang</span><span lang="ne">मोरङ</span></li>
+              <li><span>Okhaldhunga</span><span lang="ne">ओखलढुङ्गा</span></li>
+              <li><span>Panchthar</span><span lang="ne">पाँचथर</span></li>
+              <li><span>Sankhuwasabha</span><span lang="ne">संखुवासभा</span></li>
+              <li><span>Solukhumbu</span><span lang="ne">सोलुखुम्बु</span></li>
+              <li><span>Sunsari</span><span lang="ne">सुनसरी</span></li>
+              <li><span>Taplejung</span><span lang="ne">ताप्लेजुङ</span></li>
+              <li><span>Terhathum</span><span lang="ne">तेह्रथुम</span></li>
+              <li><span>Udayapur</span><span lang="ne">उदयपुर</span></li>
+              </ul>
+            </div>
+            <div class="district-group">
+              <h3>Madhesh <span lang="ne">मधेश प्रदेश</span></h3>
+              <ul>
+              <li><span>Bara</span><span lang="ne">बारा</span></li>
+              <li><span>Dhanusha</span><span lang="ne">धनुषा</span></li>
+              <li><span>Mahottari</span><span lang="ne">महोत्तरी</span></li>
+              <li><span>Parsa</span><span lang="ne">पर्सा</span></li>
+              <li><span>Rautahat</span><span lang="ne">रौतहट</span></li>
+              <li><span>Saptari</span><span lang="ne">सप्तरी</span></li>
+              <li><span>Sarlahi</span><span lang="ne">सर्लाही</span></li>
+              <li><span>Siraha</span><span lang="ne">सिराहा</span></li>
+              </ul>
+            </div>
+            <div class="district-group">
+              <h3>Bagmati <span lang="ne">बागमती प्रदेश</span></h3>
+              <ul>
+              <li><span>Bhaktapur</span><span lang="ne">भक्तपुर</span></li>
+              <li><span>Chitwan</span><span lang="ne">चितवन</span></li>
+              <li><span>Dhading</span><span lang="ne">धादिङ</span></li>
+              <li><span>Dolakha</span><span lang="ne">दोलखा</span></li>
+              <li><span>Kathmandu</span><span lang="ne">काठमाडौं</span></li>
+              <li><span>Kavrepalanchok</span><span lang="ne">काभ्रेपलाञ्चोक</span></li>
+              <li><span>Lalitpur</span><span lang="ne">ललितपुर</span></li>
+              <li><span>Makwanpur</span><span lang="ne">मकवानपुर</span></li>
+              <li><span>Nuwakot</span><span lang="ne">नुवाकोट</span></li>
+              <li><span>Ramechhap</span><span lang="ne">रामेछाप</span></li>
+              <li><span>Rasuwa</span><span lang="ne">रसुवा</span></li>
+              <li><span>Sindhuli</span><span lang="ne">सिन्धुली</span></li>
+              <li><span>Sindhupalchok</span><span lang="ne">सिन्धुपाल्चोक</span></li>
+              </ul>
+            </div>
+            <div class="district-group">
+              <h3>Gandaki <span lang="ne">गण्डकी प्रदेश</span></h3>
+              <ul>
+              <li><span>Baglung</span><span lang="ne">बागलुङ</span></li>
+              <li><span>Gorkha</span><span lang="ne">गोरखा</span></li>
+              <li><span>Kaski</span><span lang="ne">कास्की</span></li>
+              <li><span>Lamjung</span><span lang="ne">लमजुङ</span></li>
+              <li><span>Manang</span><span lang="ne">मनाङ</span></li>
+              <li><span>Mustang</span><span lang="ne">मुस्ताङ</span></li>
+              <li><span>Myagdi</span><span lang="ne">म्याग्दी</span></li>
+              <li><span>Nawalpur</span><span lang="ne">नवलपरासी पूर्व</span></li>
+              <li><span>Parbat</span><span lang="ne">पर्वत</span></li>
+              <li><span>Syangja</span><span lang="ne">स्याङ्जा</span></li>
+              <li><span>Tanahun</span><span lang="ne">तनहुँ</span></li>
+              </ul>
+            </div>
+            <div class="district-group">
+              <h3>Lumbini <span lang="ne">लुम्बिनी प्रदेश</span></h3>
+              <ul>
+              <li><span>Arghakhanchi</span><span lang="ne">अर्घाखाँची</span></li>
+              <li><span>Banke</span><span lang="ne">बाँके</span></li>
+              <li><span>Bardiya</span><span lang="ne">बर्दिया</span></li>
+              <li><span>Dang</span><span lang="ne">दाङ</span></li>
+              <li><span>Gulmi</span><span lang="ne">गुल्मी</span></li>
+              <li><span>Kapilvastu</span><span lang="ne">कपिलवस्तु</span></li>
+              <li><span>Palpa</span><span lang="ne">पाल्पा</span></li>
+              <li><span>Parasi (Nawalparasi West)</span><span lang="ne">नवलपरासी पश्चिम</span></li>
+              <li><span>Pyuthan</span><span lang="ne">प्युठान</span></li>
+              <li><span>Rolpa</span><span lang="ne">रोल्पा</span></li>
+              <li><span>Rukum East</span><span lang="ne">रुकुम पूर्व</span></li>
+              <li><span>Rupandehi</span><span lang="ne">रुपन्देही</span></li>
+              </ul>
+            </div>
+            <div class="district-group">
+              <h3>Karnali <span lang="ne">कर्णाली प्रदेश</span></h3>
+              <ul>
+              <li><span>Dailekh</span><span lang="ne">दैलेख</span></li>
+              <li><span>Dolpa</span><span lang="ne">डोल्पा</span></li>
+              <li><span>Humla</span><span lang="ne">हुम्ला</span></li>
+              <li><span>Jajarkot</span><span lang="ne">जाजरकोट</span></li>
+              <li><span>Jumla</span><span lang="ne">जुम्ला</span></li>
+              <li><span>Kalikot</span><span lang="ne">कालिकोट</span></li>
+              <li><span>Mugu</span><span lang="ne">मुगु</span></li>
+              <li><span>Rukum West</span><span lang="ne">रुकुम पश्चिम</span></li>
+              <li><span>Salyan</span><span lang="ne">सल्यान</span></li>
+              <li><span>Surkhet</span><span lang="ne">सुर्खेत</span></li>
+              </ul>
+            </div>
+            <div class="district-group">
+              <h3>Sudurpashchim <span lang="ne">सुदूरपश्चिम प्रदेश</span></h3>
+              <ul>
+              <li><span>Achham</span><span lang="ne">अछाम</span></li>
+              <li><span>Baitadi</span><span lang="ne">बैतडी</span></li>
+              <li><span>Bajhang</span><span lang="ne">बझाङ</span></li>
+              <li><span>Bajura</span><span lang="ne">बाजुरा</span></li>
+              <li><span>Dadeldhura</span><span lang="ne">डडेलधुरा</span></li>
+              <li><span>Darchula</span><span lang="ne">दार्चुला</span></li>
+              <li><span>Doti</span><span lang="ne">डोटी</span></li>
+              <li><span>Kailali</span><span lang="ne">कैलाली</span></li>
+              <li><span>Kanchanpur</span><span lang="ne">कञ्चनपुर</span></li>
+              </ul>
+            </div>
+          </div>
+        </details>
+      </div>
+
+      <figure class="atlas-map">
+        <div class="atlas-map-frame">
+          <img src="/assets/nepal-mark.svg?v=1.2.0" width="720" height="413"
+               alt="Point map of Nepal: 753 palika centroids, 77 district anchors and 7 province rings, plotted from the nGeo GeoJSON bindings. Centroids are approximate."
+               decoding="async">
+        </div>
+        <figcaption>
+          <span class="legend"><i class="lg-palika"></i>753 palika centroids</span>
+          <span class="legend"><i class="lg-district"></i>77 district anchors</span>
+          <span class="legend"><i class="lg-province"></i>7 province rings</span>
+          <span class="legend-note">Approximate centroids · nGeo bindings · CC-BY-4.0</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
   <!-- ══════════ Projects ══════════ -->
   <section class="section" id="projects" aria-labelledby="projects-title">
-    <div class="section-head">
-      <p class="eyebrow">Portfolio</p>
+    <div class="section-head reveal">
+      <p class="eyebrow">02 · Portfolio</p>
       <h2 id="projects-title">The projects</h2>
       <p>Real code, real data, real licenses. Every figure below is traceable to a source — or declared as a gap.</p>
     </div>
 
     <div class="cards">
 
-      <!-- nGeo -->
-      <article class="card" aria-labelledby="proj-ngeo">
-        <div class="card-top">
-          <div class="monogram geo" aria-hidden="true">ग</div>
-          <div>
-            <h3 id="proj-ngeo">nGeo</h3>
-            <div class="repo">namunaONE/nGeo · 339 commits</div>
+      <!-- nGeo — flagship -->
+      <article class="card card--feature reveal" aria-labelledby="proj-ngeo">
+        <div class="feature-main">
+          <div class="card-top">
+            <div class="monogram geo" aria-hidden="true">ग</div>
+            <div>
+              <h3 id="proj-ngeo">nGeo</h3>
+              <div class="repo">namunaONE/nGeo · 339 commits</div>
+            </div>
+          </div>
+          <p class="desc"><strong>Nepal's administrative divisions as an offline Dart package</strong> — 7 provinces, 77 districts, 753 local bodies, 6,743 wards. Official CBS/NSO codes (PDDPP), ISO 3166-2, Devanagari names, boundary polygons, district elevation stats.</p>
+          <div class="pills">
+            <span class="pill pill-flagship">Flagship</span>
+            <span class="pill pill-stable">Stable · v2.10.0</span>
+            <span class="pill pill-chip">MIT</span>
+            <span class="pill pill-chip">CC-BY-4.0 data</span>
+            <span class="pill pill-chip">Zero deps</span>
+          </div>
+          <div class="install">
+            <code id="install-ngeo">dart pub add nepal_admin_api</code>
+            <button class="copy-btn" data-copy-target="install-ngeo" aria-label="Copy install command">Copy</button>
+          </div>
+          <div class="card-links">
+            <a href="https://pub.dev/packages/nepal_admin_api" rel="noopener">pub.dev ↗</a>
+            <a href="https://namunaone.github.io/nGeo/" rel="noopener">Live site ↗</a>
+            <a href="https://namunaone.github.io/nGeo/explorer.html" rel="noopener">Data Explorer ↗</a>
+            <a href="https://github.com/namunaONE/nGeo" rel="noopener">GitHub ↗</a>
           </div>
         </div>
-        <p class="desc"><strong>Nepal's administrative divisions as an offline Dart package</strong> — 7 provinces, 77 districts, 753 local bodies, 6,743 wards. Official CBS/NSO codes (PDDPP), ISO 3166-2, Devanagari names, boundary polygons, district elevation stats.</p>
-        <div class="pills">
-          <span class="pill pill-stable">Stable · v2.10.0</span>
-          <span class="pill pill-chip">MIT</span>
-          <span class="pill pill-chip">CC-BY-4.0 data</span>
-          <span class="pill pill-chip">Zero deps</span>
-        </div>
-        <div class="install">
-          <code id="install-ngeo">dart pub add nepal_admin_api</code>
-          <button class="copy-btn" data-copy-target="install-ngeo" aria-label="Copy install command">Copy</button>
-        </div>
-        <div class="card-links">
-          <a href="https://pub.dev/packages/nepal_admin_api" rel="noopener">pub.dev ↗</a>
-          <a href="https://namunaone.github.io/nGeo/" rel="noopener">Live site ↗</a>
-          <a href="https://namunaone.github.io/nGeo/explorer.html" rel="noopener">Data Explorer ↗</a>
-          <a href="https://github.com/namunaONE/nGeo" rel="noopener">GitHub ↗</a>
-        </div>
+
+        <aside class="feature-aside" aria-label="nGeo at a glance">
+          <span class="f-label">The flagship · verified data</span>
+          <div class="f-stat"><span class="f-num">753/753</span><span class="f-cap">local bodies with a code — 100%</span></div>
+          <div class="f-stat"><span class="f-num">548</span><span class="f-cap">doubly-attested CBS codes</span></div>
+          <div class="f-stat"><span class="f-num">148</span><span class="f-cap">tests · enforced 100% line coverage</span></div>
+          <div class="f-stat"><span class="f-num">130/130</span><span class="f-cap">pub.dev points</span></div>
+        </aside>
       </article>
 
       <!-- nMiti -->
-      <article class="card" aria-labelledby="proj-nmiti">
+      <article class="card reveal" aria-labelledby="proj-nmiti">
         <div class="card-top">
           <div class="monogram miti" aria-hidden="true">मिति</div>
           <div>
@@ -256,7 +422,7 @@
       </article>
 
       <!-- nHisab -->
-      <article class="card" aria-labelledby="proj-nhisab">
+      <article class="card reveal" aria-labelledby="proj-nhisab">
         <div class="card-top">
           <div class="monogram hisab" aria-hidden="true">हि</div>
           <div>
@@ -284,32 +450,32 @@
 
   <!-- ══════════ The Workshop ══════════ -->
   <section class="section" id="workshop" aria-labelledby="workshop-title" style="padding-top:0">
-    <div class="section-head">
-      <p class="eyebrow">In the workshop</p>
+    <div class="section-head reveal">
+      <p class="eyebrow">03 · In the workshop</p>
       <h2 id="workshop-title">The Workshop</h2>
       <p class="workshop-note">Public repositories, planted October–November 2026. Empty on purpose — each ships when its data is verified, not before.</p>
     </div>
 
     <div class="workshop-grid">
-      <a class="w-card" href="https://github.com/namunaONE/nWeather" rel="noopener">
+      <a class="w-card reveal" href="https://github.com/namunaONE/nWeather" rel="noopener">
         <div class="w-glyph" aria-hidden="true">मौ</div>
         <div class="w-name">nWeather</div>
         <div class="w-desc">Weather for Nepal — seasonal patterns, district-level, bilingual.</div>
         <div class="w-status">Placeholder · Open repo ↗</div>
       </a>
-      <a class="w-card" href="https://github.com/namunaONE/nBhumi" rel="noopener">
+      <a class="w-card reveal" href="https://github.com/namunaONE/nBhumi" rel="noopener">
         <div class="w-glyph" aria-hidden="true">भू</div>
         <div class="w-name">nBhumi</div>
         <div class="w-desc">भूमि — land. Survey data, parcels, and boundaries for Nepal.</div>
         <div class="w-status">Placeholder · Open repo ↗</div>
       </a>
-      <a class="w-card" href="https://github.com/namunaONE/nTransit" rel="noopener">
+      <a class="w-card reveal" href="https://github.com/namunaONE/nTransit" rel="noopener">
         <div class="w-glyph" aria-hidden="true">या</div>
         <div class="w-name">nTransit</div>
         <div class="w-desc">Travel in Nepal — routes, fares, and transit data, in the open.</div>
         <div class="w-status">Placeholder · Open repo ↗</div>
       </a>
-      <a class="w-card" href="https://github.com/namunaONE/nElection" rel="noopener">
+      <a class="w-card reveal" href="https://github.com/namunaONE/nElection" rel="noopener">
         <div class="w-glyph" aria-hidden="true">च</div>
         <div class="w-name">nElection</div>
         <div class="w-desc">चुनाव — elections. Constituencies, results, and open electoral data.</div>
@@ -320,7 +486,7 @@
 
   <!-- ══════════ About / Ethos ══════════ -->
   <section class="section" id="about" aria-labelledby="about-title" style="padding-top:0">
-    <p class="eyebrow">About</p>
+    <p class="eyebrow">04 · About</p>
     <h2 id="about-title" class="sr-only">About Namuna One</h2>
 
     <div class="about-grid">
@@ -358,11 +524,11 @@
 
   <!-- ══════════ Links ══════════ -->
   <section class="section" id="links" aria-labelledby="links-title" style="padding-top:0">
-    <div class="section-head">
-      <p class="eyebrow">Elsewhere</p>
+    <div class="section-head reveal">
+      <p class="eyebrow">05 · Elsewhere</p>
       <h2 id="links-title">Find us</h2>
     </div>
-    <ul class="link-list">
+    <ul class="link-list reveal">
       <li><a class="link-row" href="https://github.com/namunaONE" rel="me noopener"><span class="link-name">GitHub</span><span class="link-desc">@namunaONE — all repositories, issues, discussions</span><span class="link-arrow">→</span></a></li>
       <li><a class="link-row" href="https://pub.dev/packages/nepal_admin_api" rel="noopener"><span class="link-name">pub.dev</span><span class="link-desc">nepal_admin_api — install the nGeo dataset as a Dart package</span><span class="link-arrow">→</span></a></li>
       <li><a class="link-row" href="https://github.com/namunaONE/nGeo/tree/main/bindings" rel="noopener"><span class="link-name">Bindings</span><span class="link-desc">JavaScript/TypeScript · Python · CSV · GeoJSON — generated from the same verified dataset</span><span class="link-arrow">→</span></a></li>
@@ -408,6 +574,7 @@
         </ul>
       </nav>
     </div>
+    <p class="colophon">Set in system fonts · hand-written HTML &amp; CSS · no frameworks, no trackers, no build step · <span class="mono">site v1.2.0</span></p>
     <div class="footer-bottom">
       <span>© <span id="footer-year">2026</span> Namuna One · Maintained by namunaONE under HyaMuji and Taire&nbsp;Bhai</span>
       <span>Code MIT · Data CC-BY-4.0/CC0 · Not affiliated with the Government of Nepal · <a href="#main">Back to top ↑</a></span>
@@ -416,6 +583,6 @@
 </footer>
 
 <span class="sr-only" role="status" aria-live="polite" id="copy-status"></span>
-<script src="/assets/js/main.js?v=1.1.0" defer></script>
+<script src="/assets/js/main.js?v=1.2.0" defer></script>
 </body>
 </html>

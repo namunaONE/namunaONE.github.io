@@ -146,6 +146,13 @@
   --dot: rgba(14, 77, 92, 0.16);
   --aura: rgba(14, 77, 92, 0.16);
   --watermark: rgba(14, 77, 92, 0.09);
+
+  /* Atlas point-map tokens (mirror the SVG's own media styles) */
+  --map-palika: #1c5b6b;
+  --map-district: #0e4d5c;
+  --map-province: #c4552d;
+  --map-palika-opacity: 0.72;
+  --map-district-opacity: 1;
   --shadow-color: 20, 30, 31;
   --shadow-sm: 0 1px 2px rgba(var(--shadow-color), 0.05);
   --shadow: 0 1px 2px rgba(var(--shadow-color), 0.05), 0 10px 28px rgba(var(--shadow-color), 0.08);
@@ -208,6 +215,12 @@
     --dot: rgba(143, 199, 199, 0.13);
     --aura: rgba(143, 199, 199, 0.1);
     --watermark: rgba(143, 199, 199, 0.06);
+
+    --map-palika: #8fc7c7;
+    --map-district: #d7eeec;
+    --map-province: #f0a583;
+    --map-palika-opacity: 0.5;
+    --map-district-opacity: 1;
     --shadow-color: 0, 0, 0;
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
     --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 10px 28px rgba(0, 0, 0, 0.35);
@@ -648,6 +661,13 @@ body.menu-open .mobile-menu { display: block; }
   color: var(--band-muted);
   margin-top: 0.55rem;
 }
+.stat-ne {
+  font-family: var(--font-deva);
+  font-size: 1rem;
+  color: var(--band-muted);
+  margin-top: 0.1rem;
+  opacity: 0.9;
+}
 .numbers-caption {
   margin-top: 1.4rem;
   padding-top: 1rem;
@@ -657,11 +677,146 @@ body.menu-open .mobile-menu { display: block; }
   font-family: var(--font-mono);
 }
 
+/* ── Atlas — the point map ─────────────────────────────────────────────── */
+
+.atlas-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.25rem, 4vw, 2.5rem);
+  box-shadow: var(--shadow);
+}
+.atlas-copy h2 { font-size: var(--text-2xl); margin-bottom: 0.75rem; }
+.atlas-lede { color: var(--ink-soft); max-width: 46ch; }
+
+.atlas-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 1.3rem 0 1.1rem;
+}
+.atlas-stats div { border-left: 1px solid var(--line-strong); padding-left: 0.75rem; }
+.atlas-stats div:first-child { border-left: 0; padding-left: 0; }
+.atlas-stats dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 600;
+  color: var(--teal);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.atlas-stats dt {
+  margin-top: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.atlas-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+
+.atlas-list {
+  margin-top: 1.1rem;
+  border-top: 1px solid var(--line);
+  padding-top: 0.5rem;
+}
+.atlas-list summary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.05em;
+  color: var(--link);
+  border-radius: var(--radius-sm);
+}
+.atlas-list summary::marker { color: var(--accent-strong); }
+.atlas-list summary:hover { color: var(--link-hover); }
+.atlas-list[open] summary { margin-bottom: 0.5rem; }
+.atlas-note { font-family: var(--font-mono); font-size: 0.64rem; color: var(--muted); margin: 0.4rem 0 0.9rem; }
+
+.district-groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.1rem 1.6rem;
+}
+.district-group h3 {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 0.4rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+.district-group h3 span {
+  font-family: var(--font-deva);
+  font-size: 1rem;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--teal);
+}
+.district-group ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  columns: 2;
+  column-gap: 1.2rem;
+  font-size: 0.8rem;
+}
+.district-group li {
+  break-inside: avoid;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.18rem 0;
+  color: var(--ink-soft);
+  border-bottom: 1px solid var(--line);
+}
+.district-group li span[lang='ne'] { font-family: var(--font-deva); color: var(--muted); font-size: 0.9em; }
+
+.atlas-map { margin: 0; }
+.atlas-map-frame {
+  background-image: radial-gradient(var(--dot) 1px, transparent 1.3px);
+  background-size: 20px 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: clamp(0.5rem, 1.5vw, 0.9rem);
+}
+.atlas-map-frame img { display: block; width: 100%; height: auto; }
+.atlas-map figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
+  margin-top: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  color: var(--muted);
+  align-items: center;
+}
+.legend { display: inline-flex; align-items: center; gap: 0.35rem; white-space: nowrap; }
+.legend i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.lg-palika { background: var(--map-palika); }
+.lg-district { background: var(--map-district); }
+.lg-province { background: transparent; border: 1.5px solid var(--map-province); }
+.legend-note { flex-basis: 100%; }
+
 /* ── Project cards ──────────────────────────────────────────────────────── */
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.25rem;
 }
 
@@ -684,6 +839,52 @@ body.menu-open .mobile-menu { display: block; }
     border-color: var(--line-hover);
   }
 }
+
+/* Featured flagship card — nGeo gets the bento treatment */
+.card--feature {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  align-items: stretch;
+}
+.feature-main { display: flex; flex-direction: column; min-width: 0; }
+.feature-aside {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.85rem;
+  background: var(--surface-sunken);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: clamp(1rem, 2vw, 1.4rem);
+}
+.f-label {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--accent-strong);
+  font-weight: 700;
+}
+.f-stat {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.15rem 0.6rem;
+  border-top: 1px solid var(--line);
+  padding-top: 0.7rem;
+}
+.f-stat:first-of-type { border-top: 0; padding-top: 0; }
+.f-num {
+  font-family: var(--font-mono);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--teal);
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.f-cap { font-size: 0.78rem; color: var(--muted); }
 
 .card-top {
   display: flex;
@@ -733,6 +934,7 @@ body.menu-open .mobile-menu { display: block; }
 .pill-stable { color: var(--good); background: var(--good-soft); }
 .pill-active { color: var(--teal); background: var(--teal-soft); }
 .pill-invite { color: var(--warn); background: var(--warn-soft); }
+.pill-flagship { color: var(--action-fg); background: var(--action-bg); }
 .pill-chip { color: var(--ink-soft); background: var(--surface-sunken); border-color: var(--line); font-weight: 500; }
 
 .install {
@@ -962,6 +1164,13 @@ body.menu-open .mobile-menu { display: block; }
 }
 .footer-bottom a { color: var(--footer-fg); }
 
+.colophon {
+  margin: 1.1rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--footer-muted);
+}
+
 /* ── 404 ────────────────────────────────────────────────────────────────── */
 
 .error-page {
@@ -977,15 +1186,47 @@ body.menu-open .mobile-menu { display: block; }
 .error-page h1 { font-size: clamp(2rem, 6vw, 3.2rem); margin: 1rem 0 0.75rem; }
 .error-page p { color: var(--muted); max-width: 44ch; margin-bottom: 1.5rem; }
 
+/* ── Motion — entrance + scroll-driven reveals ──────────────────────────── */
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-copy > * { animation: hero-rise 0.65s var(--ease-out) both; }
+  .hero-copy > *:nth-child(1) { animation-delay: 0.02s; }
+  .hero-copy > *:nth-child(2) { animation-delay: 0.08s; }
+  .hero-copy > *:nth-child(3) { animation-delay: 0.16s; }
+  .hero-copy > *:nth-child(4) { animation-delay: 0.24s; }
+  .hero-copy > *:nth-child(5) { animation-delay: 0.32s; }
+
+  @keyframes hero-rise {
+    from { opacity: 0; translate: 0 14px; }
+    to { opacity: 1; translate: 0 0; }
+  }
+
+  /* Pure-CSS scroll reveals where supported; static elsewhere.
+     Animates `translate`, not `transform`, so hover lifts keep working. */
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: reveal-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 6% entry 55%;
+    }
+    @keyframes reveal-rise {
+      from { opacity: 0; translate: 0 22px; }
+      to { opacity: 1; translate: 0 0; }
+    }
+  }
+}
+
 /* ── Responsive ─────────────────────────────────────────────────────────── */
 
 @media (max-width: 1000px) {
-  .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cards { grid-template-columns: 1fr; }
+  .card--feature { grid-template-columns: 1fr; }
   .workshop-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .numbers-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; }
   .stat { border-left: 0; padding-left: 0; }
   .about-grid { grid-template-columns: 1fr; }
   .dictionary { position: static; }
+  .atlas-panel { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 760px) {
@@ -999,11 +1240,15 @@ body.menu-open .mobile-menu { display: block; }
   .workshop-grid { grid-template-columns: 1fr 1fr; }
   .footer-grid { grid-template-columns: 1fr; }
   .link-desc { display: none; }
+  .district-groups { grid-template-columns: 1fr; }
+  .atlas-stats { gap: 0.5rem; }
 }
 
 @media (max-width: 420px) {
   .workshop-grid { grid-template-columns: 1fr; }
   .trust-row li { font-size: 0.66rem; }
+  .district-group ul { columns: 1; }
+  .atlas-stats dd { font-size: 1.4rem; }
 }
 
 /* ── 4 · Adaptations ────────────────────────────────────────────────────── */
@@ -1054,6 +1299,12 @@ body.menu-open .mobile-menu { display: block; }
     color: #111;
     font-size: 11.5pt;
     line-height: 1.5;
+  }
+
+  .reveal, .hero-copy > * {
+    animation: none !important;
+    opacity: 1 !important;
+    translate: none !important;
   }
 
   .site-header, .mobile-menu, .cta-row, .hero-art, .skip-link,

@@ -1,4 +1,4 @@
-# Namuna One — Design System v1.1
+# Namuna One — Design System v1.2
 
 The visual and interaction rules behind **namunaone.github.io**.
 Stone + Deep Teal, terracotta accent. System fonts only. Zero third-party requests.
@@ -66,6 +66,7 @@ Assets: `assets/favicon.svg` (same mark) · `assets/og.svg` (1200×630 social ca
 | `--good` / `--good-soft` | green-700 / 50 | green-300 / 900 |
 | `--warn` / `--warn-soft` | amber-700 / 50 | amber-300 / 900 |
 | `--focus` | teal-600 | teal-300 |
+| `--map-palika` / `--map-district` / `--map-province` | `#1C5B6B` / `#0E4D5C` / `#C4552D` | `#8FC7C7` / `#D7EEEC` / `#F0A583` |
 
 Dark values activate via `@media (prefers-color-scheme: dark)`. Never test dark mode by adding a class — the OS drives it.
 
@@ -106,6 +107,7 @@ Rules: headings `text-wrap: balance`, paragraphs `text-wrap: pretty`; measure �
 - Breakpoints: 1000px (3→2 cards, about stacks), 760px (nav collapses, hero stacks, cards 1-col), 420px (workshop 1-col).
 - Hero: 2-col 1.05/0.95 until 760px, then art-first stacked. `min-height: min(88svh, 860px)`.
 - Anchor targets get `scroll-margin-top: 5.25rem` (sticky header offset).
+- Editorial numbering: `01 · The data`, `02 · Portfolio`, `03 · In the workshop`, `04 · About`, `05 · Elsewhere` — mono eyebrow, terracotta rule.
 
 ---
 
@@ -117,10 +119,16 @@ Rules: headings `text-wrap: balance`, paragraphs `text-wrap: pretty`; measure �
 | **Button ghost** | transparent, 1px `--line-strong`, text `--ghost-fg`; hover teal-soft fill |
 | **Nav** | sticky, blurred `--bg` at 82%, hairline appears on scroll; active section = `aria-current="true"` teal-soft pill |
 | **Card** | surface, 1px line, 16 radius, faint shadow; hover lift 3px + `--line-hover` (pointer only) |
-| **Pill** | mono 0.68rem, 999 radius; semantic: stable → green, active → teal, invite → amber, chip → sunken |
+| **Feature card** | nGeo spans both columns (bento); internal 2-col: content + `--surface-sunken` metrics panel. Stacks below 1000px. |
+| **Atlas panel** | surface card holding the Nepal point map; copy column + map column, 1-col below 1000px. Map sits on a dotted grid frame. |
+| **Point map** | `assets/nepal-mark.svg` — generated from nGeo `bindings/geojson` (753 palikas · 77 districts · 7 provinces). Dots adapt via `prefers-color-scheme` inside the SVG; legend uses `--map-*`. |
+| **District index** | native `<details>` — 77 districts grouped by province, English + Devanagari, no JS. |
+| **Pill** | mono 0.68rem, 999 radius; semantic: stable → green, active → teal, invite → amber, flagship → action fill, chip → sunken |
 | **Install block** | `--code-bg`, mono 0.78rem, copy button right; announces "Copied" via live region |
 | **Monogram** | 56px, 12 radius, fixed primitives (geo teal · miti terracotta · hisab stone-800) so dark mode never flips brand tiles |
 | **Sample card** | floating evidence card in hero; 212px max; subtle 6–8.5s float, disabled by reduced-motion |
+| **Stat band** | deep-teal full-bleed; numerals in display serif; English uppercase label + Devanagari label below (`lang="ne"`) |
+| **Colophon** | mono 0.68rem footer line: system fonts · hand-written · no trackers · version |
 | **Dictionary card** | sticky on desktop ≥1000px; headword display serif + Devanagari accent |
 | **Link row** | 48px min; hover shifts 4px + arrow slides 3px |
 | **Footer** | dedicated dark tokens (never `--ink`), 3 columns → 1 under 760px |
@@ -130,7 +138,9 @@ Rules: headings `text-wrap: balance`, paragraphs `text-wrap: pretty`; measure �
 ## 6 · Motion
 
 - Durations: `--dur-fast` 150ms · `--dur` 250ms; easing `--ease-out` cubic-bezier(0.22, 0.61, 0.36, 1).
-- Animate transform/opacity only. Nothing loops except the hero sample cards (decorative, opt-out).
+- Hero copy rises in on load (0.65s, staggered 60–80ms) via the independent `translate` property, not `transform`.
+- Section blocks use **pure-CSS scroll-driven reveals** (`animation-timeline: view()`, `animation-range: entry 6%–55%`) where supported; unsupported browsers get static content. Reveals animate `translate`/`opacity` only, so card hover lifts (transform) never conflict.
+- Nothing loops except the hero sample cards (decorative).
 - `prefers-reduced-motion: reduce` kills all animation/transition and smooth scroll.
 
 ---
