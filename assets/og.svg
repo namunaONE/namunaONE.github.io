@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Namuna One — नमूना — Sharing is Caring. Verified open data for Nepal.">
+  <defs>
+    <radialGradient id="glow" cx="78%" cy="32%" r="65%">
+      <stop offset="0%" stop-color="#0E4D5C" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#0E4D5C" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="#F5F4F2"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <!-- watermark -->
+  <text x="1120" y="165" text-anchor="middle" font-family="'Noto Serif Devanagari','Nirmala UI',serif" font-size="300" fill="#0E4D5C" opacity="0.09">न</text>
+
+  <!-- wordmark tile -->
+  <g transform="translate(96,84)">
+    <rect width="88" height="88" rx="19" fill="#0E4D5C"/>
+    <text x="44" y="61" text-anchor="middle" font-family="'Noto Serif Devanagari','Nirmala UI',serif" font-size="50" font-weight="700" fill="#F5F4F2">न</text>
+    <circle cx="67" cy="15" r="7" fill="#C4552D"/>
+  </g>
+  <text x="204" y="142" font-family="Inter,'Segoe UI',system-ui,sans-serif" font-size="34" font-weight="700" fill="#1E2A2B" letter-spacing="-0.5">Namuna One</text>
+
+  <!-- headline -->
+  <text x="96" y="330" font-family="Georgia,'Iowan Old Style','Palatino Linotype',serif" font-size="96" font-weight="600" fill="#1E2A2B" letter-spacing="-2">Sharing is</text>
+  <text x="96" y="435" font-family="Georgia,'Iowan Old Style','Palatino Linotype',serif" font-size="96" font-weight="600" letter-spacing="-2"><tspan fill="#0E4D5C">Caring.</tspan><tspan fill="#C4552D"> </tspan></text>
+
+  <!-- subline -->
+  <text x="96" y="505" font-family="Inter,'Segoe UI',system-ui,sans-serif" font-size="25" fill="#3C4A4B">Verified, offline-first open data and Dart tools for Nepal.</text>
+
+  <!-- footer strip -->
+  <line x1="96" y1="545" x2="1104" y2="545" stroke="#D4D1CB" stroke-width="2"/>
+  <text x="96" y="592" font-family="Consolas,'Cascadia Code',monospace" font-size="20" fill="#55605F">namunaone.github.io</text>
+  <text x="1104" y="592" text-anchor="end" font-family="Consolas,'Cascadia Code',monospace" font-size="20" fill="#0E4D5C">753/753 coded · 109 BS years · MIT</text>
+</svg>

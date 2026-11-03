@@ -1,0 +1,29 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# Node (if you ever add tooling)
+node_modules/
+npm-debug.log*
+
+# Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Build output (reserved for future use)
+dist/
+build/
+
+# Local preview server (not part of the site)
+_serve.mjs
