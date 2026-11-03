@@ -138,6 +138,8 @@
   --focus: var(--teal-600);
   --selection-bg: var(--teal-600);
   --selection-fg: var(--stone-50);
+  --spot-border: rgba(14, 77, 92, 0.55);
+  --spot-wash: rgba(14, 77, 92, 0.055);
 
   --tile-geo: var(--teal-600);
   --tile-miti: var(--terra-500);
@@ -211,6 +213,8 @@
     --focus: var(--teal-400);
     --selection-bg: var(--teal-300);
     --selection-fg: #08262b;
+    --spot-border: rgba(143, 199, 199, 0.5);
+    --spot-wash: rgba(143, 199, 199, 0.07);
 
     --dot: rgba(143, 199, 199, 0.13);
     --aura: rgba(143, 199, 199, 0.1);
@@ -824,6 +828,8 @@ body.menu-open .mobile-menu { display: block; }
   display: flex;
   flex-direction: column;
   min-width: 0;
+  position: relative;
+  isolation: isolate;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
@@ -838,6 +844,48 @@ body.menu-open .mobile-menu { display: block; }
     box-shadow: var(--shadow-lift);
     border-color: var(--line-hover);
   }
+}
+
+/* Pointer spotlight — 1px masked ring + a 5% wash. Fine pointers only. */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 35%),
+              var(--spot-border), transparent 62%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease-out);
+  pointer-events: none;
+  z-index: 3;
+}
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 35%),
+              var(--spot-wash), transparent 60%);
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease-out);
+  pointer-events: none;
+  z-index: -1;
+}
+.card.spot::before,
+.card.spot::after,
+.card:focus-within::before,
+.card:focus-within::after { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .card::before, .card::after { display: none; }
+}
+@media (hover: none), (pointer: coarse) {
+  .card.spot::before, .card.spot::after { opacity: 0; }
 }
 
 /* Featured flagship card — nGeo gets the bento treatment */
@@ -885,6 +933,14 @@ body.menu-open .mobile-menu { display: block; }
   font-variant-numeric: tabular-nums;
 }
 .f-cap { font-size: 0.78rem; color: var(--muted); }
+
+.eco-line {
+  margin: -0.4rem 0 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  color: var(--muted);
+}
+.eco-line span { color: var(--ink-soft); }
 
 .card-top {
   display: flex;
@@ -1030,6 +1086,42 @@ body.menu-open .mobile-menu { display: block; }
   padding-top: 0.5rem;
 }
 
+/* ── Method — the verification pipeline ────────────────────────────────── */
+
+.method-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+.step {
+  border-top: 2px solid var(--line-strong);
+  padding-top: 1rem;
+}
+.step-num {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--accent-strong);
+}
+.step h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0.4rem 0 0.45rem;
+}
+.step p { font-size: 0.86rem; color: var(--muted); line-height: 1.5; }
+
+.method-note {
+  margin-top: 1.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+.method-note a { color: var(--link); }
+
 /* ── About / ethos ──────────────────────────────────────────────────────── */
 
 .about-grid {
@@ -1065,6 +1157,7 @@ body.menu-open .mobile-menu { display: block; }
 }
 .dictionary ol { margin: 0; padding-left: 1.2rem; color: var(--ink-soft); }
 .dictionary ol li { margin-bottom: 0.55rem; }
+.dictionary ol li::marker { color: var(--accent-strong); font-family: var(--font-mono); font-size: 0.9em; }
 .dictionary .why {
   margin-top: 1rem;
   padding-top: 1rem;
@@ -1214,6 +1307,28 @@ body.menu-open .mobile-menu { display: block; }
       to { opacity: 1; translate: 0 0; }
     }
   }
+
+  /* Scroll-linked hero depth — compositor-only translate, no JS. */
+  @supports (animation-timeline: scroll()) {
+    .hero-art {
+      animation: hero-drift linear both;
+      animation-timeline: scroll(root block);
+      animation-range: 0 90vh;
+    }
+    .hero-art::after {
+      animation: mark-drift linear both;
+      animation-timeline: scroll(root block);
+      animation-range: 0 90vh;
+    }
+    @keyframes hero-drift {
+      from { translate: 0 0; }
+      to { translate: 0 -44px; }
+    }
+    @keyframes mark-drift {
+      from { translate: 0 0; }
+      to { translate: 0 26px; }
+    }
+  }
 }
 
 /* ── Responsive ─────────────────────────────────────────────────────────── */
@@ -1227,6 +1342,7 @@ body.menu-open .mobile-menu { display: block; }
   .about-grid { grid-template-columns: 1fr; }
   .dictionary { position: static; }
   .atlas-panel { grid-template-columns: 1fr; }
+  .method-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 760px) {
@@ -1249,6 +1365,10 @@ body.menu-open .mobile-menu { display: block; }
   .trust-row li { font-size: 0.66rem; }
   .district-group ul { columns: 1; }
   .atlas-stats dd { font-size: 1.4rem; }
+}
+
+@media (max-width: 560px) {
+  .method-steps { grid-template-columns: 1fr; }
 }
 
 /* ── 4 · Adaptations ────────────────────────────────────────────────────── */
@@ -1308,7 +1428,8 @@ body.menu-open .mobile-menu { display: block; }
   }
 
   .site-header, .mobile-menu, .cta-row, .hero-art, .skip-link,
-  .site-footer nav, .numbers, .install .copy-btn, .badge-row { display: none !important; }
+  .site-footer nav, .numbers, .install .copy-btn, .badge-row,
+  .card::before, .card::after { display: none !important; }
 
   a { color: #111; text-decoration: underline; }
   main a[href^='http']::after {

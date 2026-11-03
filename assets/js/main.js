@@ -134,6 +134,39 @@
     });
   });
 
+  /* ── Pointer spotlight on project cards (fine pointers only) ────────── */
+  var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  if (finePointer.matches && !reduceMotion.matches) {
+    document.querySelectorAll('.card').forEach(function (card) {
+      var frame = 0;
+      var mx = 0;
+      var my = 0;
+
+      function paint() {
+        frame = 0;
+        card.style.setProperty('--mx', mx + 'px');
+        card.style.setProperty('--my', my + 'px');
+      }
+
+      card.addEventListener('pointermove', function (event) {
+        var rect = card.getBoundingClientRect();
+        mx = event.clientX - rect.left;
+        my = event.clientY - rect.top;
+        if (!frame) frame = window.requestAnimationFrame(paint);
+      }, { passive: true });
+
+      card.addEventListener('pointerenter', function (event) {
+        if (event.pointerType === 'touch') return;
+        card.classList.add('spot');
+      });
+      card.addEventListener('pointerleave', function () {
+        card.classList.remove('spot');
+      });
+    });
+  }
+
   /* ── Footer year ────────────────────────────────────────────────────── */
   var yearEl = document.getElementById('footer-year');
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());

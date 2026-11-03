@@ -1,4 +1,4 @@
-# Namuna One — Design System v1.2
+# Namuna One — Design System v1.3
 
 The visual and interaction rules behind **namunaone.github.io**.
 Stone + Deep Teal, terracotta accent. System fonts only. Zero third-party requests.
@@ -120,6 +120,9 @@ Rules: headings `text-wrap: balance`, paragraphs `text-wrap: pretty`; measure �
 | **Nav** | sticky, blurred `--bg` at 82%, hairline appears on scroll; active section = `aria-current="true"` teal-soft pill |
 | **Card** | surface, 1px line, 16 radius, faint shadow; hover lift 3px + `--line-hover` (pointer only) |
 | **Feature card** | nGeo spans both columns (bento); internal 2-col: content + `--surface-sunken` metrics panel. Stacks below 1000px. |
+| **Spotlight** | project cards get a pointer-tracked 1px ring (`mask-composite: exclude`) + 5% wash. Fine pointers only; `:focus-within` shows a static glow; reduced motion disables it. |
+| **Method steps** | 4-column numbered pipeline; 2 columns at 1000px, 1 at 560px. Each step a 2px top rule + mono index. |
+| **Eco line** | mono 0.66rem under the nGeo install: the other generated targets (TypeScript · Python · CSV · GeoJSON). |
 | **Atlas panel** | surface card holding the Nepal point map; copy column + map column, 1-col below 1000px. Map sits on a dotted grid frame. |
 | **Point map** | `assets/nepal-mark.svg` — generated from nGeo `bindings/geojson` (753 palikas · 77 districts · 7 provinces). Dots adapt via `prefers-color-scheme` inside the SVG; legend uses `--map-*`. |
 | **District index** | native `<details>` — 77 districts grouped by province, English + Devanagari, no JS. |
@@ -140,7 +143,10 @@ Rules: headings `text-wrap: balance`, paragraphs `text-wrap: pretty`; measure �
 - Durations: `--dur-fast` 150ms · `--dur` 250ms; easing `--ease-out` cubic-bezier(0.22, 0.61, 0.36, 1).
 - Hero copy rises in on load (0.65s, staggered 60–80ms) via the independent `translate` property, not `transform`.
 - Section blocks use **pure-CSS scroll-driven reveals** (`animation-timeline: view()`, `animation-range: entry 6%–55%`) where supported; unsupported browsers get static content. Reveals animate `translate`/`opacity` only, so card hover lifts (transform) never conflict.
-- Nothing loops except the hero sample cards (decorative).
+- The hero collage gets **scroll-linked parallax** (`animation-timeline: scroll(root block)`, 0→90vh, −44px) with the Devanagari watermark drifting the other way (+26px). Compositor-only, no scroll listeners.
+- Province rings in the atlas breathe slowly (7s, staggered 0.55s) — the only looping motion besides hero sample cards.
+- Pointer spotlight is position, not timeline motion: a masked 1px ring plus a ≤7% wash, rAF-throttled, `(hover: hover) and (pointer: fine)` only, disabled under reduced motion.
+- Nothing loops except the hero sample cards and atlas province rings (both decorative).
 - `prefers-reduced-motion: reduce` kills all animation/transition and smooth scroll.
 
 ---

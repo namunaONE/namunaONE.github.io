@@ -5,11 +5,15 @@
   <style>
     .palika { fill: #1c5b6b; opacity: 0.72; }
     .district { fill: #0e4d5c; }
-    .province { fill: none; stroke: #c4552d; stroke-width: 1.4; stroke-opacity: 0.8; }
+    .province { fill: none; stroke: #c4552d; stroke-width: 1.4; stroke-opacity: 0.8; transform-box: fill-box; transform-origin: center; animation: breathe 7s ease-in-out infinite alternate; }
+    @keyframes breathe { from { stroke-opacity: 0.45; transform: scale(1); } to { stroke-opacity: 0.95; transform: scale(1.16); } }
     @media (prefers-color-scheme: dark) {
       .palika { fill: #8fc7c7; opacity: 0.5; }
       .district { fill: #d7eeec; }
-      .province { stroke: #f0a583; stroke-opacity: 0.9; }
+      .province { stroke: #f0a583; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .province { animation: none; }
     }
   </style>
   <g class="palikas">
@@ -847,12 +851,12 @@
     <circle class="district" cx="33.4" cy="149.8" r="2.7"><title>Kanchanpur</title></circle>
   </g>
   <g class="provinces">
-    <circle class="province" cx="639.2" cy="337.9" r="7.2"/>
-    <circle class="province" cx="501.4" cy="354.0" r="7.2"/>
-    <circle class="province" cx="477.7" cy="268.5" r="7.2"/>
-    <circle class="province" cx="352.7" cy="216.3" r="7.2"/>
-    <circle class="province" cx="255.2" cy="241.4" r="7.2"/>
-    <circle class="province" cx="184.2" cy="133.8" r="7.2"/>
-    <circle class="province" cx="82.8" cy="107.0" r="7.2"/>
+    <circle class="province" cx="639.2" cy="337.9" r="7.2" style="animation-delay:0.00s"/>
+    <circle class="province" cx="501.4" cy="354.0" r="7.2" style="animation-delay:0.55s"/>
+    <circle class="province" cx="477.7" cy="268.5" r="7.2" style="animation-delay:1.10s"/>
+    <circle class="province" cx="352.7" cy="216.3" r="7.2" style="animation-delay:1.65s"/>
+    <circle class="province" cx="255.2" cy="241.4" r="7.2" style="animation-delay:2.20s"/>
+    <circle class="province" cx="184.2" cy="133.8" r="7.2" style="animation-delay:2.75s"/>
+    <circle class="province" cx="82.8" cy="107.0" r="7.2" style="animation-delay:3.30s"/>
   </g>
 </svg>
