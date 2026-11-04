@@ -73,7 +73,7 @@ No GitHub Actions required — there is nothing to build.
 - **Accessibility** — focus-visible rings, 44px targets, skip link, `aria-current` scrollspy, `aria-live` copy status, scoped "verified" labels (never color alone); the spotlight also lights on `:focus-within`.
 - **og:image** is the raster `assets/og.png` (1200×630), rendered from the hand-authored `assets/og.svg` source with system fonts (`@resvg/resvg-js`, one-off build). Edit the SVG, re-render the PNG.
 - **No frameworks** — edit the HTML directly; there are no partials to sync. Asset URLs carry a `?v=` cache-buster — bump it in `index.html` and `404.html` whenever `style.css`, `main.js` or `nepal-mark.svg` changes.
-- Figures on the page (7/77/753/6,743 · 109 BS years · 548+205) are hand-maintained snapshots from nGeo v2.10.0 and nMiti — update them when the data products version up.
+- Figures on the page (7/77/753/6,743 · 109 BS years · 548+205 · 0 uncoded) are verified against live sources — `bindings/meta.json` (CI-checked by `verify-live.mjs` A19) and pub.dev (linked, 200) — and updated when the data products version up.
 - Contact is **GitHub-only** by decision. Add a mailto row to the Links section if that changes.
 - **Not affiliated with the Government of Nepal.**
 

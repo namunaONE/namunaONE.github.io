@@ -1,5 +1,5 @@
 /* =========================================================================
-   NAMUNA ONE — DESIGN SYSTEM v1.1
+   NAMUNA ONE — DESIGN SYSTEM v1.3
    Stone + Deep Teal · terracotta accent
 
    Layers:
@@ -1193,14 +1193,11 @@ body.menu-open .mobile-menu { display: block; }
   .footer-grid { grid-template-columns: minmax(0, 1fr); }
   .link-desc { display: none; }
   .district-groups { grid-template-columns: minmax(0, 1fr); }
-  .atlas-stats { gap: 0.5rem; }
 }
 
 @media (max-width: 420px) {
   .workshop-grid { grid-template-columns: minmax(0, 1fr); }
-  .trust-row li { font-size: 0.66rem; }
   .district-group ul { columns: 1; }
-  .atlas-stats dd { font-size: 1.4rem; }
 }
 
 @media (max-width: 560px) {
@@ -1248,7 +1245,7 @@ body.menu-open .mobile-menu { display: block; }
   .stat-num, .stat-label, .numbers-caption { color: CanvasText; }
   .site-footer { background: Canvas; color: CanvasText; border-top: 1px solid CanvasText; }
   .footer-grid h4, .footer-tag, .footer-bottom { color: CanvasText; }
-  .pill, .chip, .trust-row li { border: 1px solid CanvasText; }
+  .pill, .chip { border: 1px solid CanvasText; }
   .link-row { border: 1px solid CanvasText; }
 }
 

@@ -2,7 +2,7 @@
 
 ## Material ledger (required per page)
 Every page or component ships with a ledger:
-- **real**: figures traceable to a named source (nGeo v2.10.0, nMiti, CBS/NSO, etc.)
+- **real**: figures traceable to a named source (nGeo bindings v2.15.0 · bindings/meta.json, nMiti, CBS/NSO, etc.)
 - **placeholder**: known empty state (workshop repos), marked explicitly
 - **absent**: deliberately not shown (testimonials, metrics nobody gave, logos not licensed)
 
