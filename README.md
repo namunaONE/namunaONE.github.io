@@ -20,8 +20,10 @@ A single-page, dependency-free static site. No build step, no framework, no webf
 │   ├── og.svg            # 1200×630 social card source (hand-authored SVG)
 │   └── og.png            # Rendered social card — referenced by og:image
 ├── STYLEGUIDE.md         # Token + component + voice rules (system of record)
-├── .skills/namuna-guardian/  # Anti-slop skill: SKILL.md, gates, slop-scan + verify-live scripts
-├── .skills/namuna-flow/      # Elephant–Goldfish pipeline: brainstorm → draft → review → build → drift
+├── .opencode/skills/namuna-guardian/  # Anti-slop skill: SKILL.md, gates, slop-scan + verify-live scripts
+├── .opencode/skills/namuna-*/         # Elephant–Goldfish pipeline: brainstorm → draft → review → build → drift
+├── .opencode/command/                 # Slash commands: /namuna-build <slug>, /namuna-review, …
+├── .opencode/agent/goldfish.md        # Zero-context reviewer agent (P2)
 ├── .hallmark/            # Explicit waivers + build log (never silent)
 ├── docs/designs/         # Spec-first design docs (spec-driven flow)
 ├── .github/workflows/guardian.yml  # CI: slop-scan + live link/figure verification

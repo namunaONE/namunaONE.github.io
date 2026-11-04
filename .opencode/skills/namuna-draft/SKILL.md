@@ -21,9 +21,9 @@ Turn the concept brief into a living design document under `docs/designs/<slug>/
 
 - The approved concept brief from `namuna-brainstorm`
 - `STYLEGUIDE.md` (project root)
-- `.skills/namuna-guardian/references/design-system.md`
-- `.skills/namuna-guardian/references/provenance.md`
-- `.skills/namuna-guardian/references/anti-slop-gates.md`
+- `.opencode/skills/namuna-guardian/references/design-system.md`
+- `.opencode/skills/namuna-guardian/references/provenance.md`
+- `.opencode/skills/namuna-guardian/references/anti-slop-gates.md`
 - The page/component being designed (if it exists)
 
 ### 1. Create the design doc structure

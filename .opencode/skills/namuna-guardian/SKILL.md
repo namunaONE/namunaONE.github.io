@@ -40,8 +40,8 @@ These rules bind every output. A build that breaks one does not ship.
 2. Build the material ledger: real / placeholder / absent.
 3. Load `references/design-system.md`, `references/provenance.md`, `references/anti-slop-gates.md`.
 4. Make the smallest deviation from the current design.
-5. Run `node scripts/slop-scan.mjs <path>`. Fix every FAIL.
-6. Run `node scripts/verify-live.mjs index.html` — external links (A20) + figure drift vs `bindings/meta.json` (A19). Fix every FAIL.
+5. Run `node .opencode/skills/namuna-guardian/scripts/slop-scan.mjs <path>`. Fix every FAIL.
+6. Run `node .opencode/skills/namuna-guardian/scripts/verify-live.mjs index.html` — external links (A20) + figure drift vs `bindings/meta.json` (A19). Fix every FAIL.
 7. Record any waiver explicitly with reason; never waive silently.
 8. Record decisions in `.hallmark/log.json` so consecutive builds diversify.
 
@@ -51,4 +51,4 @@ These rules bind every output. A build that breaks one does not ship.
 - **INFO** → advisory.
 
 ## Expansion path
-Guardian is phase 1 (proof + rules). Phase 2 expands to flow skills (`brainstorm`, `draft`, `build`, `review`, `drift`) — the Elephant–Goldfish pipeline — once Guardian is proven. Do not add flow skills before Guardian passes every eval below.
+Guardian is phase 1 (proof + rules) — proven. Phase 2 (the Elephant–Goldfish flow) is live as sibling skills: `namuna-brainstorm`, `namuna-draft`, `namuna-review`, `namuna-build`, `namuna-resolve`, `namuna-bootstrap`, `namuna-drift-report`. Flow builds run inside this Guardian floor; this skill's gates bind them.

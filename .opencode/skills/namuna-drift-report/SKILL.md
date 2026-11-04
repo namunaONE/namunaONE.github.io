@@ -22,9 +22,9 @@ Detect where code has drifted from spec: sections added/removed, tokens changed,
 - `docs/designs/<slug>/spec.md` (status must be `built`)
 - `docs/designs/<slug>/brief.md`
 - The built files listed in the spec's log entry
-- `.skills/namuna-guardian/references/design-system.md`
-- `.skills/namuna-guardian/references/provenance.md`
-- `.skills/namuna-guardian/references/anti-slop-gates.md`
+- `.opencode/skills/namuna-guardian/references/design-system.md`
+- `.opencode/skills/namuna-guardian/references/provenance.md`
+- `.opencode/skills/namuna-guardian/references/anti-slop-gates.md`
 - `.hallmark/waivers.jsonl` (if it exists)
 
 ### 1. Drift categories

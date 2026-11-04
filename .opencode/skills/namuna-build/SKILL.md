@@ -22,9 +22,9 @@ Turn the approved spec into shipped code (HTML/CSS/JS) under the project root, t
 - `docs/designs/<slug>/spec.md` — status must be `approved`
 - `docs/designs/<slug>/brief.md`
 - `STYLEGUIDE.md` (project root)
-- `.skills/namuna-guardian/references/design-system.md`
-- `.skills/namuna-guardian/references/provenance.md`
-- `.skills/namuna-guardian/references/anti-slop-gates.md`
+- `.opencode/skills/namuna-guardian/references/design-system.md`
+- `.opencode/skills/namuna-guardian/references/provenance.md`
+- `.opencode/skills/namuna-guardian/references/anti-slop-gates.md`
 - `.hallmark/waivers.jsonl` (if it exists)
 
 You may **not** read chat history, prior reviewer reasoning, or any document not listed above. If the spec doesn't say it, it doesn't ship.
@@ -52,7 +52,7 @@ You may **not** read chat history, prior reviewer reasoning, or any document not
 
 Run:
 ```powershell
-node .skills/namuna-guardian/scripts/slop-scan.mjs <built-files>
+node .opencode/skills/namuna-guardian/scripts/slop-scan.mjs <built-files>
 ```
 
 - Fix every hard FAIL (A1, A2, A3, A4, A5, A6, A8, A13, A14, A15, A16, A17, A18).

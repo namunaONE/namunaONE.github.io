@@ -22,7 +22,7 @@ Resolve review findings into concrete, agreed-upon changes. Update the spec or t
 - `docs/designs/<slug>/spec.md`
 - `docs/designs/<slug>/brief.md`
 - The `namuna-review` output (first word + gates + issues)
-- `.skills/namuna-guardian/references/anti-slop-gates.md`
+- `.opencode/skills/namuna-guardian/references/anti-slop-gates.md`
 - `.hallmark/waivers.jsonl` (if it exists)
 
 ### 1. Classify each review finding

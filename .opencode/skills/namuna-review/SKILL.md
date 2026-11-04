@@ -11,6 +11,20 @@ metadata:
 
 Use this after `namuna-draft` produces `docs/designs/<slug>/spec.md`. You hold **zero context** about the conversation that produced the brief. You read only: the design doc, the current source code, STYLEGUIDE.md, and the guardian references. You are a fresh pair of eyes.
 
+## Zero-context protocol (structural)
+
+You are the **relay**, not the reviewer. To keep the review genuinely independent:
+
+1. Spawn the **`goldfish` subagent** (`.opencode/agent/goldfish.md` — read-only, subagent mode; falls back to a `general` subagent if unavailable). It starts with a blank slate: no conversation, no builder reasoning.
+2. The subagent prompt must be **self-contained** and contain nothing but:
+   - The exact file paths: `docs/designs/<slug>/spec.md`, `docs/designs/<slug>/brief.md`, `STYLEGUIDE.md`, `.opencode/skills/namuna-guardian/references/anti-slop-gates.md`, the built/target code files, `.hallmark/waivers.jsonl`
+   - The gates J1–J10 **copied inline** (never "as discussed")
+   - The output contract (first word `ship|fix|rebuild|recapture` + per-gate findings)
+3. Never paste conversation history, your own design reasoning, or a summary of the design into the prompt. The goldfish must be able to say "the spec doesn't say" — that is its job.
+4. Relay the goldfish's verdict **verbatim** as the review. You may add logistics (next step, file paths); never edit the verdict or soften a FAIL.
+
+Fallback: if no subagent mechanism is available, perform the review yourself **after re-reading only the listed files** — and stamp the review `same-context` in the spec's status log so drift-check knows the review was weaker.
+
 ## Job
 
 Stress-test the draft spec. Confirm completeness, clarity, self-containment, and implementation readiness. Your first word is one of: `recapture`, `rebuild`, `fix`, or `ship`.
@@ -21,7 +35,7 @@ Stress-test the draft spec. Confirm completeness, clarity, self-containment, and
 
 - `docs/designs/<slug>/spec.md` and `brief.md`
 - `STYLEGUIDE.md` (project root)
-- `.skills/namuna-guardian/references/` (all four files)
+- `.opencode/skills/namuna-guardian/references/` (all four files)
 - The current page/component source code (HTML/CSS/JS)
 - `.hallmark/waivers.jsonl` (if it exists)
 
@@ -53,7 +67,7 @@ Read `spec.md` aloud. Could a developer who has never met the namunaONE team imp
 
 ### 4. Implementation readiness check
 
-Run `node .skills/namuna-guardian/scripts/slop-scan.mjs <target-files>` on the current code. Record any hard FAILs. The doc must not propose anything that violates the hard floor (A1–A18).
+Run `node .opencode/skills/namuna-guardian/scripts/slop-scan.mjs <target-files>` on the current code. Record any hard FAILs. The doc must not propose anything that violates the hard floor (A1–A18).
 
 ### 5. Judged gates
 

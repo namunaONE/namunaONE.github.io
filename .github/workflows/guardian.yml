@@ -29,7 +29,7 @@ jobs:
           node-version: 22
 
       - name: Static floor (slop-scan)
-        run: node .skills/namuna-guardian/scripts/slop-scan.mjs .
+        run: node .opencode/skills/namuna-guardian/scripts/slop-scan.mjs .
 
       - name: Live verification (links A20 + figure drift A19)
-        run: node .skills/namuna-guardian/scripts/verify-live.mjs index.html
+        run: node .opencode/skills/namuna-guardian/scripts/verify-live.mjs index.html

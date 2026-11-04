@@ -21,8 +21,8 @@ Turn a five-word prompt into a concept brief with: material, audience, use, tone
 
 Read, in order:
 - `STYLEGUIDE.md` (project root) — locked design system: tokens, type, spacing, motion, voice
-- `.skills/namuna-guardian/references/design-system.md` — token primitives → semantics → components
-- `.skills/namuna-guardian/references/provenance.md` — real / placeholder / absent material ledger
+- `.opencode/skills/namuna-guardian/references/design-system.md` — token primitives → semantics → components
+- `.opencode/skills/namuna-guardian/references/provenance.md` — real / placeholder / absent material ledger
 - The current page or component being changed (if any)
 - `.hallmark/log.json` or `.hallmark/log.jsonl` (if it exists) — prior builds for diversification
 
@@ -53,7 +53,7 @@ Namuna One is fundamentally editorial + modern-minimal (verified open data). If 
 
 Name what a visitor comes to do (the job). Read that job against the category anatomy: where real sites in this category put the action, the sections they are built around, how they end. The page is built from that anatomy — never from a default run of figures, steps, and an email band.
 
-Starting points from `.skills/namuna-flow/references/macrostructures.md` — load only the one you pick.
+Starting points from `.opencode/skills/namuna-brainstorm/references/macrostructures.md` — load only the one you pick.
 
 Then design the page: its shape, how it opens, each section's content and composition, nav, footer, what carries the hero.
 

@@ -21,14 +21,14 @@ Create or update documentation for an existing codebase by reverse-engineering i
 
 - The target path or slug (HTML/CSS/JS files)
 - `STYLEGUIDE.md` (project root)
-- `.skills/namuna-guardian/references/` (all four files)
+- `.opencode/skills/namuna-guardian/references/` (all four files)
 - `.hallmark/waivers.jsonl` (if it exists)
 
 ### 1. Scan the existing code
 
 Run:
 ```powershell
-node .skills/namuna-guardian/scripts/slop-scan.mjs <target>
+node .opencode/skills/namuna-guardian/scripts/slop-scan.mjs <target>
 ```
 
 Record:

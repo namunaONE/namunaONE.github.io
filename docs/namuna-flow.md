@@ -40,7 +40,7 @@ namuna-draft <slug>       (rewrite)  OR  namuna-brainstorm (recapture)  OR  namu
 ## References (shared truth)
 
 ```
-.skills/namuna-flow/references/
+.opencode/skills/namuna-brainstorm/references/
 ├── design-system.md      # tokens, type, spacing, motion (from STYLEGUIDE.md)
 ├── provenance.md         # real / placeholder / absent material ledger
 ├── anti-slop-gates.md    # A1–A18 pass/fail checks
@@ -58,7 +58,7 @@ namuna-draft <slug>       (rewrite)  OR  namuna-brainstorm (recapture)  OR  namu
 
 ## Relation to Guardian
 
-Guardian (`.skills/namuna-guardian/`) is the hard floor: tokens, provenance, anti-slop gates, scanner, waivers. Flow skills run **inside** Guardian's constraints — they never waive A1–A18 without an explicit waiver record.
+Guardian (`.opencode/skills/namuna-guardian/`) is the hard floor: tokens, provenance, anti-slop gates, scanner, waivers. Flow skills run **inside** Guardian's constraints — they never waive A1–A18 without an explicit waiver record.
 
 ## Expansion
 
