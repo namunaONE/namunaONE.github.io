@@ -1170,7 +1170,7 @@ body.menu-open .mobile-menu { display: block; }
 .principles { list-style: none; margin: 0 0 1.5rem; padding: 0; display: grid; gap: 0.35rem; }
 .principle {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: minmax(0, auto) 1fr;
   gap: 0.9rem;
   align-items: baseline;
   padding: 0.75rem 0.25rem;
@@ -1334,41 +1334,41 @@ body.menu-open .mobile-menu { display: block; }
 /* ── Responsive ─────────────────────────────────────────────────────────── */
 
 @media (max-width: 1000px) {
-  .cards { grid-template-columns: 1fr; }
-  .card--feature { grid-template-columns: 1fr; }
+  .cards { grid-template-columns: minmax(0, 1fr); }
+  .card--feature { grid-template-columns: minmax(0, 1fr); }
   .workshop-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .numbers-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; }
   .stat { border-left: 0; padding-left: 0; }
-  .about-grid { grid-template-columns: 1fr; }
+  .about-grid { grid-template-columns: minmax(0, 1fr); }
   .dictionary { position: static; }
-  .atlas-panel { grid-template-columns: 1fr; }
+  .atlas-panel { grid-template-columns: minmax(0, 1fr); }
   .method-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 760px) {
   .nav-links, .btn-nav { display: none; }
   .nav-toggle { display: flex; }
-  .hero { grid-template-columns: 1fr; min-height: auto; padding-top: 2rem; }
+  .hero { grid-template-columns: minmax(0, 1fr); min-height: auto; padding-top: 2rem; }
   .hero-art { min-height: 340px; order: -1; }
   .sample-card { width: min(210px, 62%); }
   .sc-b { top: 30%; }
-  .cards { grid-template-columns: 1fr; }
-  .workshop-grid { grid-template-columns: 1fr 1fr; }
-  .footer-grid { grid-template-columns: 1fr; }
+  .cards { grid-template-columns: minmax(0, 1fr); }
+  .workshop-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .footer-grid { grid-template-columns: minmax(0, 1fr); }
   .link-desc { display: none; }
-  .district-groups { grid-template-columns: 1fr; }
+  .district-groups { grid-template-columns: minmax(0, 1fr); }
   .atlas-stats { gap: 0.5rem; }
 }
 
 @media (max-width: 420px) {
-  .workshop-grid { grid-template-columns: 1fr; }
+  .workshop-grid { grid-template-columns: minmax(0, 1fr); }
   .trust-row li { font-size: 0.66rem; }
   .district-group ul { columns: 1; }
   .atlas-stats dd { font-size: 1.4rem; }
 }
 
 @media (max-width: 560px) {
-  .method-steps { grid-template-columns: 1fr; }
+  .method-steps { grid-template-columns: minmax(0, 1fr); }
 }
 
 /* ── 4 · Adaptations ────────────────────────────────────────────────────── */
