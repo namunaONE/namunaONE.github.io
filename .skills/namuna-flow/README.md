@@ -9,6 +9,10 @@ Phase 2 of the Namuna Design system. Composable skills for spec-first, review-be
 | `namuna-brainstorm` | Elephant — deep context | Full repo, STYLEGUIDE, references, log | Rough idea → concept brief |
 | `namuna-draft` | Elephant — deep context | Full repo, approved brief | Brief → `docs/designs/<slug>/spec.md` |
 | `namuna-review` | Goldfish — zero context | Draft spec + source code only | Spec → ship/fix/rebuild/recapture |
+| `namuna-build` | Elephant — deep context | Approved spec + tokens + references | Spec → shipped code |
+| `namuna-resolve` | Elephant — deep context | Review findings + spec + waivers | fix/rebuild/recapture → agreed changes |
+| `namuna-bootstrap` | Elephant — deep context | Existing code + references | Existing code → draft spec |
+| `namuna-drift-report` | Elephant — deep context | Built spec + shipped code | Built code → drift verdict |
 
 ## Pipeline
 
@@ -19,7 +23,18 @@ namuna-draft <slug>
     ↓ (spec written)
 namuna-review <slug>
     ↓ (reviewer says ship)
-namuna-build <slug>   ← your coding agent, builds from spec only
+namuna-build <slug>          ← builds from spec only
+    ↓ (code shipped)
+namuna-drift-report <slug>   ← compares spec vs code
+```
+
+Review loop (when review doesn't say ship):
+```
+namuna-review <slug> → fix/rebuild/recapture
+    ↓
+namuna-resolve <slug>     → agrees changes, records waivers
+    ↓
+namuna-draft <slug>       (rewrite)  OR  namuna-brainstorm (recapture)  OR  namuna-build (fix)
 ```
 
 ## References (shared truth)
@@ -39,7 +54,7 @@ namuna-build <slug>   ← your coding agent, builds from spec only
 - `draft` — spec still being written
 - `approved` — review passed; ready to build
 - `built` — code shipped; drift-check pending
-- `drifted` — code no longer matches spec (run `namuna-drift`)
+- `drifted` — code no longer matches spec (run `namuna-drift-report`)
 
 ## Relation to Guardian
 
@@ -47,7 +62,4 @@ Guardian (`.skills/namuna-guardian/`) is the hard floor: tokens, provenance, ant
 
 ## Expansion
 
-- `namuna-build` — implement from approved spec only (your coding agent, context-limited to spec)
-- `namuna-resolve` — work through review findings and agree on changes
-- `namuna-bootstrap` — create or update documentation for an existing codebase
-- `namuna-drift-report` — compare checked-in spec with current source code; report divergences
+Flow is complete at 7 skills. Any further addition (e.g. `namuna-audit` for one-off page audits) follows the same pattern: one SKILL.md, references only when needed, Guardian floor always respected.
