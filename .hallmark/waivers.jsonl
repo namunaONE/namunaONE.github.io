@@ -1,4 +1,4 @@
-{"id":"A14","file":"index.html","line":410,"reason":"Historical year range 1975-2083 BS from verified nGeo dataset (nMiti core years), not a static invented today's date. Documented in references/provenance.md."}
+{"id":"A14","file":"index.html","line":361,"reason":"Historical year range 1975-2083 BS from verified nGeo dataset (nMiti core years), not a static invented today's date. Documented in references/provenance.md."}
 {"id":"A9","scope":"design-system","reason":"Deliberate fresh-identity eyebrow (uppercase, tracked) per STYLEGUIDE.md type section; contrast verified >= 4.5:1."}
 {"id":"A10","scope":"design-system","reason":"Deliberate tracked letter-spacing per STYLEGUIDE.md type scale; contrast verified >= 4.5:1."}
 {"id":"A11","scope":"design-system","reason":"Middle-dot separators used deliberately in stat chips and link rows; contrast verified, not decorative status dots."}
