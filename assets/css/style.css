@@ -601,6 +601,14 @@ body.menu-open .mobile-menu { display: block; }
   font-family: var(--font-mono);
 }
 
+.numbers-today {
+  margin-top: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--band-muted);
+  line-height: 1.5;
+}
+
 /* ── Data — index + downloads ───────────────────────────────────────────── */
 
 .data-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; }
@@ -758,7 +766,7 @@ body.menu-open .mobile-menu { display: block; }
   background: var(--surface-sunken);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: clamp(1rem, 2vw, 1.4rem);
+  padding: 1.5rem;
 }
 .f-label {
   font-family: var(--font-mono);
@@ -775,7 +783,11 @@ body.menu-open .mobile-menu { display: block; }
   gap: 0.15rem 0.6rem;
   border-top: 1px solid var(--line);
   padding-top: 0.7rem;
+  margin-bottom: 0.75rem;
 }
+
+.f-stat:last-child { margin-bottom: 0; }
+
 .f-stat:first-of-type { border-top: 0; padding-top: 0; }
 .f-num {
   font-family: var(--font-mono);
@@ -786,6 +798,8 @@ body.menu-open .mobile-menu { display: block; }
   font-variant-numeric: tabular-nums;
 }
 .f-cap { font-size: 0.78rem; color: var(--muted); }
+
+.card--feature .eco-line { margin: 0.75rem 0 0; }
 
 .eco-line {
   margin: -0.4rem 0 1rem;
@@ -979,6 +993,82 @@ body.menu-open .mobile-menu { display: block; }
   color: var(--muted);
 }
 .method-note a { color: var(--link); }
+
+/* ── Tier bar — CBS attestation tiers (Method) ─────────────────────────── */
+
+.tier-bar { margin-top: 1.5rem; }
+
+.tier-bar-track {
+  display: flex;
+  width: 100%;
+  height: 12px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--line);
+  border: 1px solid transparent;
+}
+
+.tier-seg { height: 100%; }
+.tier-verified { background: var(--good); }
+.tier-single { background: var(--warn); }
+.tier-uncoded { background: var(--muted); }
+
+.tier-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+}
+
+.tier-legend li {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--ink-soft);
+  display: inline-flex;
+  align-items: center;
+}
+
+.tier-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  display: inline-block;
+  margin-right: 0.4rem;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.tier-dot.tier-verified { background: var(--good); }
+.tier-dot.tier-single { background: var(--warn); }
+.tier-dot.tier-uncoded { background: var(--muted); }
+
+.tier-note {
+  margin-top: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.tier-note a {
+  color: var(--link);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+.tier-note a:hover { color: var(--link-hover); text-decoration: underline; }
+
+.tier-source {
+  margin-top: 0.25rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--muted);
+  line-height: 1.5;
+}
 
 /* ── About / ethos ──────────────────────────────────────────────────────── */
 
@@ -1193,6 +1283,7 @@ body.menu-open .mobile-menu { display: block; }
   .footer-grid { grid-template-columns: minmax(0, 1fr); }
   .link-desc { display: none; }
   .district-groups { grid-template-columns: minmax(0, 1fr); }
+  .bs-today-grid { grid-template-columns: minmax(0, 1fr); }
 }
 
 @media (max-width: 420px) {
@@ -1233,6 +1324,10 @@ body.menu-open .mobile-menu { display: block; }
   }
   .card, .dictionary, .w-card { border-width: 2px; }
   .link-row .link-desc { color: var(--ink-soft); }
+  .bs-today { border-width: 2px; }
+  .bs-today-source { color: var(--ink-soft); }
+  .tier-bar-track { border-width: 2px; }
+  .tier-dot { border-width: 2px; }
 }
 
 @media (forced-colors: active) {
@@ -1247,6 +1342,14 @@ body.menu-open .mobile-menu { display: block; }
   .footer-grid h4, .footer-tag, .footer-bottom { color: CanvasText; }
   .pill, .chip { border: 1px solid CanvasText; }
   .link-row { border: 1px solid CanvasText; }
+  .bs-today { border: 1px solid CanvasText; background: Canvas; color: CanvasText; }
+  .bs-today-date, .bs-today-date-en, .bs-today-ad { color: CanvasText; }
+  .bs-today-source { color: CanvasText; }
+  .bs-today a { color: LinkText; }
+  .tier-bar-track { border: 1px solid CanvasText; background: Canvas; }
+  .tier-seg { background: CanvasText; }
+  .tier-dot { border: 1px solid CanvasText; }
+  .tier-note a { color: LinkText; }
 }
 
 @media print {
@@ -1272,6 +1375,10 @@ body.menu-open .mobile-menu { display: block; }
   .site-footer nav, .numbers, .install .copy-btn, .badge-row,
   .card::before, .card::after { display: none !important; }
 
+  /* .bs-today is content, not chrome: keep it printable */
+  .bs-today { display: block !important; }
+  .bs-today-grid { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) !important; }
+
   a { color: #111; text-decoration: underline; }
   main a[href^='http']::after {
     content: ' (' attr(href) ')';
@@ -1293,7 +1400,91 @@ body.menu-open .mobile-menu { display: block; }
     margin-bottom: 0.8rem;
   }
   .link-row { padding: 0.4rem 0; }
+  .bs-today { display: block !important; background: #fff; color: #111; border: 1px solid #bbb; }
+  .bs-today-grid { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); }
   .site-footer { background: #fff; color: #111; border-top: 1px solid #bbb; padding: 0.8rem 0 0; }
   .footer-grid { border: 0; padding: 0; }
   .footer-grid a, .footer-brand, .footer-tag, .footer-bottom { color: #111; }
 }
+
+/* ── bs-today — live Bikram Sambat date strip ──────────────────────────── */
+.bs-today {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+  padding: 1.5rem var(--gutter);
+}
+.bs-today .container { max-width: var(--maxw); margin-inline: auto; }
+.bs-today-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 1rem 2rem;
+  align-items: start;
+  min-height: 4.5rem;
+}
+.bs-today-primary { display: flex; flex-direction: column; gap: 0.35rem; min-width: 0; }
+.bs-today-date {
+  font-family: var(--font-deva);
+  font-size: var(--text-2xl);
+  color: var(--ink);
+  line-height: 1.1;
+  margin: 0;
+}
+.bs-today-date-en {
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.6rem;
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  color: var(--ink-soft);
+  text-decoration: none;
+  min-height: 44px;
+  padding: 0.6rem 0.75rem;
+  border-radius: var(--radius-sm);
+  transition: color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+}
+.bs-today-date-en:hover { color: var(--link-hover); background: var(--teal-soft); }
+.bs-today-ad {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+.bs-today-source {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--muted);
+  line-height: 1.5;
+  margin: 0;
+  align-self: center;
+}
+.bs-today-source a {
+  color: var(--link);
+  text-decoration: none;
+  font-weight: 600;
+}
+.bs-today-source a:hover { color: var(--link-hover); text-decoration: underline; }
+
+/* Responsive: collapse to one column below 760px */
+@media (max-width: 760px) {
+  .bs-today-grid { grid-template-columns: minmax(0, 1fr); gap: 0.75rem; }
+  .bs-today-source { align-self: start; }
+}
+
+/* Forced colors */
+@media (forced-colors: active) {
+  .bs-today { border: 1px solid CanvasText; background: Canvas; color: CanvasText; }
+  .bs-today-date, .bs-today-date-en, .bs-today-ad { color: CanvasText; }
+  .bs-today-source { color: CanvasText; }
+  .bs-today a { color: LinkText; }
+  .bs-today-date-en { border: 1px solid CanvasText; }
+}
+
+/* Prefers contrast: more */
+@media (prefers-contrast: more) {
+  .bs-today-source { color: var(--ink-soft); }
+  .bs-today { border-width: 2px; }
+  .bs-today-date-en { border-width: 2px; }
+}
+
+/* Reduced motion: strip adds no animation; global rule covers it */

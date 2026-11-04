@@ -35,6 +35,22 @@ for (const url of hrefs) {
   else FAILS.push(['A20', url, `status ${status} — dead or moved link`]);
 }
 
+/* ── bs-today: nMiti today.json liveness + shape (A20, added by bs-today spec) ── */
+try {
+  const tj = await fetch('https://namunaone.github.io/nMiti/api/v1/today.json', { signal: AbortSignal.timeout(15000) });
+  if (!OK.has(tj.status)) FAILS.push(['A20', 'today.json', `status ${tj.status} — nMiti today.json unavailable`]);
+  else {
+    const body = await tj.json();
+    if (!body || !body.bs || !body.bs.label_np || !body.ad || !body.ad.iso || !body.generated_at_utc) {
+      FAILS.push(['A20', 'today.json', 'shape mismatch — required fields missing']);
+    } else {
+      OKS.push(['A20', `today.json ok (${body.bs.label_np} / ${body.ad.iso})`]);
+    }
+  }
+} catch (e) {
+  WARNS.push(['A20', 'today.json', `network error: ${e?.message || e}`]);
+}
+
 /* ── A19 · figure drift vs live bindings meta ────────────────────────── */
 const META_URL = 'https://raw.githubusercontent.com/namunaONE/nGeo/main/bindings/meta.json';
 try {

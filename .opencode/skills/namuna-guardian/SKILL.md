@@ -28,6 +28,8 @@ These rules bind every output. A build that breaks one does not ship.
 11. **No dead links.** Never link pub.dev/npm/PyPI without verifying the package exists live first.
 12. **Workshop honesty.** Empty repos render as "placeholder" only — no roadmap dates, promised screenshots, or implied shipping.
 13. **Consistency.** One primary CTA style, one container width, one radius per nesting level.
+14. **Figure freshness.** Every number on the page must match the live source (nGeo bindings/meta.json). Stale figures are a hard fail (A19).
+15. **Link liveness.** Every external URL must resolve. Dead links are a hard fail (A20).
 
 ## Namuna-specific anti-slop rules
 - **No static BS dates.** No hardcoded Bikram Sambat dates anywhere — historical year ranges only when dataset-sourced (waived, e.g. A14).
