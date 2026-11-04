@@ -18,5 +18,8 @@ Every page or component ships with a ledger:
 - Never link pub.dev/npm/PyPI without live verification.
 - Never claim government affiliation (we are not affiliated with the Government of Nepal).
 
+## Freshness (A19)
+Page figures are hand-maintained snapshots — so they are **CI-verified** against the live source of truth (`bindings/meta.json`, fetched by `scripts/verify-live.mjs`). When nGeo's dataset moves, CI fails and the page gets updated — the page never silently drifts from the data. The bindings version (e.g. `v2.15.0`) must be stamped on the page and must match live.
+
 ## Gap declaration
 If a figure is not fully substantiated, declare the gap visibly (e.g. "approximate centroids", "72 conflicts resolved"). Never paper over a gap.

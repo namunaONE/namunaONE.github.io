@@ -1,0 +1,35 @@
+name: guardian
+
+# Namuna Design Guardian — anti-slop + live-source verification.
+# Runs the static floor (slop-scan) and live checks (links A20, figure drift A19)
+# on every push and PR.
+#
+# Note: with Pages set to "Deploy from branch", pushes to main deploy BEFORE this
+# runs — here it acts as a loud tripwire (and a hard gate on PRs). To make it a
+# true pre-deploy gate, switch Settings → Pages → Source to "GitHub Actions" and
+# extend this workflow with the Pages upload step (nothing to build — upload the
+# repo root as the artifact).
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Static floor (slop-scan)
+        run: node .skills/namuna-guardian/scripts/slop-scan.mjs .
+
+      - name: Live verification (links A20 + figure drift A19)
+        run: node .skills/namuna-guardian/scripts/verify-live.mjs index.html

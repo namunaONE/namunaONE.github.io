@@ -22,6 +22,8 @@ Pass/fail checks run by `scripts/slop-scan.mjs` and by human review.
 | A16 | Empty repo shown with fake roadmap/screenshot | FAIL |
 | A17 | One material ledger present (real/placeholder/absent) | FAIL |
 | A18 | Waivers recorded explicitly, never silent | FAIL |
+| A19 | Page figures match live `bindings/meta.json`; bindings version stamped on page | FAIL (live check) |
+| A20 | Every external link resolves (HEAD/GET verified, not assumed) | FAIL (live check) |
 
 Reviewer questions (finish gate):
 - Does every number name its source?

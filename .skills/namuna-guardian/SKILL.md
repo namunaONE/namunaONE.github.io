@@ -30,9 +30,10 @@ These rules bind every output. A build that breaks one does not ship.
 13. **Consistency.** One primary CTA style, one container width, one radius per nesting level.
 
 ## Namuna-specific anti-slop rules
-- **No static BS dates.** No hardcoded Bikram Sambat dates unless generated from nMiti data at build time.
+- **No static BS dates.** No hardcoded Bikram Sambat dates anywhere — historical year ranges only when dataset-sourced (waived, e.g. A14).
 - **No fake subsidiaries.** No "trusted by", government endorsement, or cooperative-core claims — we are not affiliated with the Government of Nepal.
 - **Workshop ≠ product.** nWeather, nBhumi, nTransit, nElection are shown as public placeholders, never as shipped products.
+- **Freshness is verified, not assumed.** Page figures must match live `bindings/meta.json` (A19) and every external link must resolve (A20) — enforced by `scripts/verify-live.mjs` + CI.
 
 ## Workflow (always)
 1. Read the current page and project tokens first.
@@ -40,8 +41,9 @@ These rules bind every output. A build that breaks one does not ship.
 3. Load `references/design-system.md`, `references/provenance.md`, `references/anti-slop-gates.md`.
 4. Make the smallest deviation from the current design.
 5. Run `node scripts/slop-scan.mjs <path>`. Fix every FAIL.
-6. Record any waiver explicitly with reason; never waive silently.
-7. Record decisions in `.hallmark/log.json` (or `.hallmark/log.jsonl`) so consecutive builds diversify.
+6. Run `node scripts/verify-live.mjs index.html` — external links (A20) + figure drift vs `bindings/meta.json` (A19). Fix every FAIL.
+7. Record any waiver explicitly with reason; never waive silently.
+8. Record decisions in `.hallmark/log.json` so consecutive builds diversify.
 
 ## Gates
 - **Hard FAIL** → build does not ship.
