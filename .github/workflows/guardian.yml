@@ -1,30 +1,37 @@
 name: guardian
 
-# Namuna Design Guardian — anti-slop + live-source verification.
-# Runs the static floor (slop-scan) and live checks (links A20, figure drift A19)
-# on every push and PR.
+# Namuna Design Guardian — anti-slop + live-source verification + gated deploy.
 #
-# Note: with Pages set to "Deploy from branch", pushes to main deploy BEFORE this
-# runs — here it acts as a loud tripwire (and a hard gate on PRs). To make it a
-# true pre-deploy gate, switch Settings → Pages → Source to "GitHub Actions" and
-# extend this workflow with the Pages upload step (nothing to build — upload the
-# repo root as the artifact).
+# Flow: guard (slop-scan A1–A18 · verify-live A19/A20) → deploy (GitHub Pages).
+# PRs and the weekly cron run the guard only; pushes to main additionally
+# deploy, so a failing gate now means a no-deploy, not a tripwire.
+#
+# Requires: Settings → Pages → Build and deployment → Source = "GitHub Actions".
+# (User sites with the .github.io name default to branch deploy; flip it once.)
 
 on:
   push:
     branches: [main]
   pull_request:
+  schedule:
+    - cron: '0 3 * * 1' # weekly drift check — Mondays 03:00 UTC
 
 permissions:
   contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
 
 jobs:
   guard:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
 
@@ -33,3 +40,22 @@ jobs:
 
       - name: Live verification (links A20 + figure drift A19)
         run: node .opencode/skills/namuna-guardian/scripts/verify-live.mjs index.html
+
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: guard
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/configure-pages@v6
+
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: .
+
+      - id: deployment
+        uses: actions/deploy-pages@v5
