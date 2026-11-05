@@ -210,11 +210,85 @@
 
   function showFallback(reason) {
     if (srcEl) srcEl.textContent = reason;
+    showPanchangSource('nMiti unreachable — panchang link above');
+  }
+
+  function showPanchangSource(reason) {
+    var pel = document.getElementById('panchang-source');
+    if (pel) pel.textContent = reason;
+  }
+
+  function showStaleSource(prefix, href, linkText) {
+    var pel = document.getElementById('panchang-source');
+    if (!pel) return;
+    pel.textContent = prefix;
+    var a = document.createElement('a');
+    a.href = href;
+    a.rel = 'noopener';
+    a.textContent = linkText;
+    pel.appendChild(a);
+  }
+
+  function timeNPT(iso) {
+    var m = String(iso).match(/T(\d{2}):(\d{2})/);
+    return m ? m[1] + ':' + m[2] + ' NPT' : '';
+  }
+
+  function renderPanchang(data) {
+    var np = document.getElementById('panchang-np');
+    var ad = document.getElementById('panchang-ad');
+    var sun = document.getElementById('panchang-sunrise');
+    var tithi = document.getElementById('panchang-tithi');
+    var src = document.getElementById('panchang-source');
+    if (!np || !ad || !sun || !tithi || !src) return;
+
+    // Devanagari date + English label span
+    np.textContent = '';
+    var deva = document.createElement('span');
+    deva.className = 'deva';
+    deva.setAttribute('lang', 'ne');
+    deva.textContent = data.bs.label_np;
+    np.appendChild(deva);
+    var en = document.createElement('span');
+    en.className = 'panchang-label-en';
+    en.textContent = ' ' + data.bs.label_en;
+    np.appendChild(en);
+    np.classList.add('is-rendered');
+
+    if (ad.hidden) {
+      ad.textContent = data.ad.label_en;
+      ad.hidden = false;
+    } else {
+      ad.textContent = data.ad.label_en;
+    }
+
+    if (sun.hidden) {
+      sun.textContent = 'Sunrise ' + timeNPT(data.panchang.sunrise_npt);
+      sun.hidden = false;
+    } else {
+      sun.textContent = 'Sunrise ' + timeNPT(data.panchang.sunrise_npt);
+    }
+
+    // Tithi — element carries the link; render the sentence as link text
+    var uEnd = timeNPT(data.panchang.tithi.udaya.ends_at);
+    var mad = data.panchang.tithi.madhyahna.name;
+    var sent = 'Tithi – ' + data.panchang.tithi.udaya.name;
+    if (uEnd) sent += ' ends ' + uEnd;
+    if (mad && mad !== data.panchang.tithi.udaya.name) sent += ' → ' + mad;
+    tithi.textContent = sent;
+
+    // Source line — fresh built nodes only
+    src.textContent = 'Source: nMiti panchang engine — engine-computed at build time, as of ' + asOfStamp(data.generated_at_utc) + ' — ';
+    var acc = document.createElement('a');
+    acc.href = data.panchang.details;
+    acc.rel = 'noopener';
+    acc.textContent = 'Panchang detail →';
+    src.appendChild(acc);
   }
 
   function render(data) {
     if (isStale(data)) {
-      showFallback('nMiti last built ' + asOfStamp(data.generated_at_utc) + ' – calendar may be stale; see nMiti (accuracy: https://namunaone.github.io/nMiti/accuracy.html)');
+      showStaleSource('nMiti may be stale — see ', 'https://namunaone.github.io/nMiti/accuracy.html', 'nMiti Accuracy →');
       return;
     }
 
@@ -258,8 +332,10 @@
     acc.textContent = 'Accuracy ↗';
     srcEl.appendChild(acc);
 
+    renderPanchang(data);
+
     var nt = document.getElementById('numbers-today');
-    if (nt) nt.textContent = 'Today in Nepal – ' + data.bs.label_np + ' – ' + data.ad.label_en;
+    if (nt) nt.textContent = 'Today – ' + data.bs.label_np + ' – ' + data.ad.label_en;
   }
 
   function fetchAndUpdate() {

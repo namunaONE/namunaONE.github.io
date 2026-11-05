@@ -8,7 +8,7 @@
     "waivers": ["A9", "A10", "A11", "A14"],
     "timestamp": "2026-11-04T00:00:00Z",
     "reviewer": "none (baseline bootstrap)",
-    "note": "Baseline bootstrap entry."
+    "note": "Baseline bootstrap entry. Site predates spec-driven flow. Scanner: 0 hard fails, 4 waived (A9, A10, A11, A14). All waivers hardened with expires=2027-01-01."
   },
   {
     "slug": "bs-today",
@@ -18,7 +18,8 @@
     "waivers": [],
     "timestamp": "2026-11-04T00:00:00Z",
     "reviewer": "namuna-review (goldfish, pass 7: ship)",
-    "signature": "live Bikram Sambat date from nMiti today.json"
+    "sections": ["bs-today strip (inserted between numbers band and data section)"],
+    "signature": "live Bikram Sambat date from nMiti today.json, with evidence tier, as-of stamp, staleness guard, and graceful fallback"
   },
   {
     "slug": "v1-4-refresh",
@@ -30,5 +31,16 @@
     "reviewer": "namuna-review (goldfish, pass 3: ship)",
     "sections": ["numbers band (+ today line)", "method (+ tier-split bar)", "projects (nGeo alignment)", "footer (colophon v1.4.0)"],
     "signature": "tier-split bar 548/205/0 + Nepal now line + nGeo card alignment"
+  },
+  {
+    "slug": "panchang-today",
+    "status": "built",
+    "spec": "docs/designs/panchang-today/spec.md",
+    "files": ["index.html", "assets/css/style.css", "assets/js/main.js"],
+    "waivers": ["A11 (main.js link-arrow convention)"],
+    "timestamp": "2026-11-05T00:00:00Z",
+    "reviewer": "namuna-review (goldfish, pass 4: fix → 4 fixes applied; build emitted)",
+    "sections": ["panchang strip (inserted between Hero and Numbers band)"],
+    "signature": "live tithi from nMiti panchang engine, both udaya/madhyahna conventions, sunrise, stale fallback, verified link targets"
   }
 ]

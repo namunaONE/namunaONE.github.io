@@ -609,6 +609,89 @@ body.menu-open .mobile-menu { display: block; }
   line-height: 1.5;
 }
 
+/* ── Panchang — today's BS date + sunrise + tithi ──────────────────────── */
+
+.panchang-today {
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding: 1.25rem var(--gutter);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+}
+
+.panchang-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 1rem 2rem;
+  align-items: baseline;
+  min-height: 5rem;
+}
+
+.panchang-primary { display: flex; flex-direction: column; gap: 0.3rem; }
+
+.panchang-date {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  color: var(--ink-soft);
+  line-height: 1.15;
+  margin: 0;
+}
+
+.panchang-date.is-rendered {
+  font-family: var(--font-deva);
+  color: var(--ink);
+}
+
+.panchang-label-en {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  color: var(--ink-soft);
+}
+
+.panchang-ad {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--muted);
+  margin: 0;
+}
+
+.panchang-sunrise {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--muted);
+  margin: 0;
+}
+
+.panchang-provenance { margin: 0; }
+
+.panchang-tithi-link {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--ink-soft);
+  text-decoration: none;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.6rem 0.75rem;
+  margin-left: -0.75rem;
+  border-radius: var(--radius-sm);
+  transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+
+.panchang-tithi-link:hover { background: var(--teal-soft); color: var(--link); }
+
+.panchang-source {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.panchang-source a { color: var(--link); text-decoration: none; }
+.panchang-source a:hover { color: var(--link-hover); text-decoration: underline; }
+
 /* ── Data — index + downloads ───────────────────────────────────────────── */
 
 .data-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; }
@@ -1283,7 +1366,7 @@ body.menu-open .mobile-menu { display: block; }
   .footer-grid { grid-template-columns: minmax(0, 1fr); }
   .link-desc { display: none; }
   .district-groups { grid-template-columns: minmax(0, 1fr); }
-  .bs-today-grid { grid-template-columns: minmax(0, 1fr); }
+  .bs-today-grid, .panchang-grid { grid-template-columns: minmax(0, 1fr); }
 }
 
 @media (max-width: 420px) {
@@ -1328,6 +1411,7 @@ body.menu-open .mobile-menu { display: block; }
   .bs-today-source { color: var(--ink-soft); }
   .tier-bar-track { border-width: 2px; }
   .tier-dot { border-width: 2px; }
+  .panchang-source { color: var(--ink-soft); }
 }
 
 @media (forced-colors: active) {
@@ -1350,6 +1434,8 @@ body.menu-open .mobile-menu { display: block; }
   .tier-seg { background: CanvasText; }
   .tier-dot { border: 1px solid CanvasText; }
   .tier-note a { color: LinkText; }
+  .panchang-today { border: 1px solid CanvasText; background: Canvas; color: CanvasText; }
+  .panchang-source a { color: LinkText; }
 }
 
 @media print {
@@ -1378,6 +1464,8 @@ body.menu-open .mobile-menu { display: block; }
   /* .bs-today is content, not chrome: keep it printable */
   .bs-today { display: block !important; }
   .bs-today-grid { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) !important; }
+  .panchang-today { display: block !important; }
+  .panchang-grid { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) !important; }
 
   a { color: #111; text-decoration: underline; }
   main a[href^='http']::after {

@@ -161,6 +161,23 @@
     </figure>
   </section>
 
+  <!-- ══════════ Today's panchang ══════════ -->
+  <section class="panchang-today" aria-labelledby="panchang-title">
+    <h2 id="panchang-title" class="sr-only">Today's panchang</h2>
+    <div class="panchang-grid">
+      <div class="panchang-primary">
+        <p class="panchang-date" lang="en" aria-live="polite" id="panchang-np">Today, in Bikram Sambat</p>
+        <p class="panchang-ad" id="panchang-ad" hidden></p>
+        <p class="panchang-sunrise" id="panchang-sunrise" hidden></p>
+      </div>
+      <p class="panchang-provenance">
+        <a class="panchang-tithi-link" id="panchang-tithi"
+           href="https://namunaone.github.io/nMiti/panchang.html" rel="noopener">Panchang detail →</a>
+      </p>
+      <p class="panchang-source" id="panchang-source" style="grid-column: 1 / -1">nMiti unreachable — panchang link above</p>
+    </div>
+  </section>
+
   <!-- ══════════ Numbers band ══════════ -->
   <section class="numbers" aria-label="Nepal in numbers">
     <div class="numbers-inner">
@@ -171,7 +188,7 @@
         <div class="stat"><div class="stat-num">6,743</div><div class="stat-label">Wards</div><div class="stat-ne deva" lang="ne">वडा</div></div>
       </div>
       <p class="numbers-caption">Sources: nGeo bindings v2.15.0 (bindings/meta.json, data as of 2026-10-27) · CBS/NSO · 6,743 declared wards vs 6,697 substantiated — gap declared</p>
-      <p class="numbers-today" id="numbers-today">Today in Bikram Sambat — see the strip below.</p>
+      <p class="numbers-today" id="numbers-today">Today, live from nMiti →</p>
     </div>
   </section>
 
