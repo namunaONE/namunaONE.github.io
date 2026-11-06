@@ -55,7 +55,7 @@ Run:
 node .opencode/skills/namuna-guardian/scripts/slop-scan.mjs <built-files>
 ```
 
-- Fix every hard FAIL (A1, A2, A3, A4, A5, A6, A8, A13, A14, A15, A16, A17, A18).
+- Fix every hard FAIL (A1, A2, A3, A4, A5, A6, A7, A8, A13, A14, A15, A16, A17, A18; A19/A20 are verified live by `verify-live.mjs`).
 - Fix or explicitly waive every WARN in `.hallmark/waivers.jsonl` with a reason.
 - Confirm 0 hard fails before declaring built.
 

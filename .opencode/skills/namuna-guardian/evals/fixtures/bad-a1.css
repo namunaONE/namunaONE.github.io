@@ -1,0 +1,10 @@
+/* A1 fixture — MUST FAIL: raw hex outside the token layer. */
+.banner {
+  color: #ff0000;
+  background: #123456;
+}
+
+@media print {
+  /* allowed context — print primitives */
+  .banner { color: #111; background: #fff; }
+}

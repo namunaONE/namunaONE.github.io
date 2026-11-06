@@ -1,5 +1,16 @@
 [
   {
+    "slug": "atlas-hero",
+    "event": "build-backfill",
+    "status": "built",
+    "spec": "docs/designs/atlas-hero/spec.md",
+    "files": ["index.html", "assets/css/style.css", "assets/js/main.js"],
+    "waivers": [],
+    "timestamp": "2026-11-04T11:29:09+05:45",
+    "reviewer": "namuna-review (goldfish, ship — per spec status log)",
+    "note": "Backfilled from git history (commit 9b07941, dated by its committer time). This build predates .hallmark/log.json; no waiver was used."
+  },
+  {
     "slug": "site",
     "event": "bootstrap",
     "status": "draft",
@@ -42,5 +53,121 @@
     "reviewer": "namuna-review (goldfish, pass 4: fix → 4 fixes applied; build emitted)",
     "sections": ["panchang strip (inserted between Hero and Numbers band)"],
     "signature": "live tithi from nMiti panchang engine, both udaya/madhyahna conventions, sunrise, stale fallback, verified link targets"
+  },
+  {
+    "slug": "infra",
+    "event": "gate-hardening",
+    "status": "done",
+    "spec": null,
+    "files": [
+      ".opencode/skills/namuna-guardian/scripts/slop-scan.mjs",
+      ".opencode/skills/namuna-guardian/scripts/self-test.mjs",
+      ".opencode/skills/namuna-guardian/scripts/gate-coverage.mjs",
+      ".opencode/skills/namuna-guardian/references/anti-slop-gates.md",
+      "scripts/flow.mjs",
+      "scripts/skill-lint.mjs",
+      ".github/workflows/guardian.yml"
+    ],
+    "waivers": [],
+    "timestamp": "2026-11-05T00:00:00Z",
+    "reviewer": "Phase A — enforcement completeness",
+    "note": "Phase A: A1 (hex outside token layer) + A7 (reduced-motion fallback) + A18 (waiver well-formedness) implemented in slop-scan; fixture pairs + self-test added; gate-coverage audit added (17 automated / 3 judged with rubrics — A6, A13, A16); flow check enforces spec states, ledgers (A17), build log, waivers; skill-lint enforces structure, path refs, gate ranges; CI consolidated into guardian.yml (slop-scan.yml removed); two raw-hex defects fixed via --tile-fg and --footer-fg-hover tokens; atlas-hero build log backfilled; ?v= unified at 1.4.1. All checks green."
+  },
+  {
+    "slug": "guardian",
+    "event": "meta-review",
+    "status": "done",
+    "spec": null,
+    "files": [
+      ".opencode/skills/namuna-guardian/SKILL.md",
+      ".opencode/skills/namuna-guardian/references/anti-slop-gates.md",
+      ".opencode/skills/namuna-guardian/scripts/slop-scan.mjs",
+      ".opencode/skills/namuna-guardian/scripts/self-test.mjs",
+      ".opencode/skills/namuna-guardian/scripts/gate-coverage.mjs",
+      ".opencode/skills/namuna-guardian/evals/scenarios.md"
+    ],
+    "waivers": [],
+    "timestamp": "2026-11-06T00:00:00Z",
+    "reviewer": "Phase D1 — meta-review (eat your own dog food)",
+    "note": "D1: ran namuna-guardian through its own gates. slop-scan on guardian tree: 0 findings. self-test: 4/4 fixture pairs pass. gate-coverage: 20 gates verified (17 automated / 3 judged rubrics). skill-lint: clean. verify-live on product page: 35 ok, 1 warn (nMiti commit count drift — expected warn-level for fast-moving value). Manual spot-check: no slop tells (no 'clean and modern', no vague 'will soon' language). Guardian passes its own hard floor."
+  },
+  {
+    "slug": "infra",
+    "event": "slo-deploy",
+    "status": "done",
+    "spec": null,
+    "files": [
+      "docs/slos.md",
+      "scripts/slo-check.mjs",
+      ".github/workflows/guardian.yml"
+    ],
+    "waivers": [],
+    "timestamp": "2026-11-06T00:00:00Z",
+    "reviewer": "Phase D2 — SLOs + error budget",
+    "note": "D2: defined 6 SLOs in docs/slos.md with error budgets (CI green rate, scanner false positive rate, eval pass rate, scan time, waiver currency, figure freshness). Added scripts/slo-check.mjs to measure current state; added slo-check to CI guardian job. Baseline: 6/6 SLOs met (CI green rate not yet measured — 0 runs = within budget; scanner FPR 0%; eval pass rate 100% (1/1 graded); scan time 413 ms static; waiver currency 5/5 current; figure freshness 0 fail). Error budget: any red run, false positive, eval failure, expired waiver, or figure drift blocks feature work."
+  },
+  {
+    "slug": "infra",
+    "event": "launch-readiness",
+    "status": "done",
+    "spec": null,
+    "files": [
+      "scripts/launch-check.mjs",
+      "docs/designs/atlas-hero/drift-report.md",
+      "docs/designs/v1-4-refresh/drift-report.md",
+      ".github/workflows/guardian.yml"
+    ],
+    "waivers": [],
+    "timestamp": "2026-11-06T00:00:00Z",
+    "reviewer": "Phase D3 — launch readiness",
+    "note": "D3: added scripts/launch-check.mjs — pre-ship readiness checklist covering spec states (built specs need clean drift reports), waiver currency, eval coverage (all 8 skills), guardian integrity (slop-scan/flow/skill-lint/gate-coverage), live verification (verify-live), and log integrity. Created missing drift reports for atlas-hero and v1-4-refresh (both verdict: clean). Added launch-check to CI guardian job so deploy is gated on readiness. Baseline: GO — 9 pass, 0 warn, 0 fail."
+  },
+  {
+    "slug": "infra",
+    "event": "a11y-ci",
+    "status": "done",
+    "spec": null,
+    "files": [
+      "scripts/a11y-check.mjs",
+      ".hallmark/waivers.jsonl",
+      ".github/workflows/guardian.yml",
+      "scripts/launch-check.mjs"
+    ],
+    "waivers": ["contrast (border on bg)"],
+    "timestamp": "2026-11-06T00:00:00Z",
+    "reviewer": "Phase D4 — automated accessibility CI",
+    "note": "D4: added scripts/a11y-check.mjs — automated accessibility checks without a browser: contrast ratios (WCAG 4.5:1 text / 3:1 UI borders), html lang, title, image alt, heading hierarchy, skip link, ARIA validity, :focus-visible, outline:none, reduced-motion, forced-colors, touch targets (44px+). Border contrast (--line/--line-strong on --bg) waived explicitly (contrast gate, pattern 'border on bg', expires 2027-01-01) — hairline decorative borders below 3:1, to be darkened via spec-driven flow. Added a11y-check to CI guardian job and launch-check. Baseline: GO — 21 pass, 0 warn, 0 fail."
+  },
+  {
+    "slug": "infra",
+    "event": "performance-budget",
+    "status": "done",
+    "spec": null,
+    "files": [
+      "lighthouserc.json",
+      "scripts/lighthouse-check.mjs",
+      ".github/workflows/guardian.yml",
+      "scripts/launch-check.mjs"
+    ],
+    "waivers": [],
+    "timestamp": "2026-11-06T00:00:00Z",
+    "reviewer": "Phase D5 — performance budget with Lighthouse CI",
+    "note": "D5: added lighthouserc.json with performance budgets (Performance >= 90, Accessibility >= 90, Best Practices >= 95, SEO >= 95, LCP <= 3000ms, CLS <= 0.1, TBT <= 300ms, etc.). Added scripts/lighthouse-check.mjs to assert budgets against Lighthouse CLI output. Added lighthouse-check to CI guardian job and launch-check. Baseline: GO — 13 pass, 2 warn, 0 fail (baseline: Perf 97, A11y 96, BP 100, SEO 100; LCP 2393ms, CLS 0.01, TBT 42ms)."
+  },
+  {
+    "slug": "infra",
+    "event": "postmortem-process",
+    "status": "done",
+    "spec": null,
+    "files": [
+      ".hallmark/postmortems/README.md",
+      ".hallmark/postmortems/TEMPLATE.md",
+      "scripts/launch-check.mjs",
+      "docs/slos.md"
+    ],
+    "waivers": [],
+    "timestamp": "2026-11-06T00:00:00Z",
+    "reviewer": "Phase D6 — postmortem process",
+    "note": "D6: added blameless postmortem process. .hallmark/postmortems/README.md with index and process; TEMPLATE.md with 7 sections (what happened, impact, root cause, detection, resolution, prevention, follow-up actions). Updated docs/slos.md error budget table with postmortem-required column. Added postmortem readiness check to launch-check.mjs (blocks deploy if open postmortems exist). Baseline: no open postmortems."
   }
 ]

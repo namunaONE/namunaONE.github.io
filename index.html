@@ -32,7 +32,7 @@
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt">
   <link rel="sitemap" type="application/xml" href="/sitemap.xml">
-  <link rel="stylesheet" href="/assets/css/style.css?v=1.4.0">
+  <link rel="stylesheet" href="/assets/css/style.css?v=1.4.1">
 
   <!-- Structured data -->
   <script type="application/ld+json">
@@ -103,7 +103,7 @@
         <text x="32" y="44" text-anchor="middle" font-family="'Nirmala UI','Noto Serif Devanagari','Mangal',serif" font-size="36" font-weight="700" fill="#F5F4F2">न</text>
         <circle cx="47" cy="17" r="5" fill="#C4552D"/>
       </svg>
-      <span class="brand-name">Namuna&nbsp;<em>One</em></span>
+      <span class="brand-name" translate="no">Namuna&nbsp;<em>One</em></span>
     </a>
 
     <ul class="nav-links">
@@ -161,9 +161,9 @@
     </figure>
   </section>
 
-  <!-- ══════════ Today's panchang ══════════ -->
+  <!-- ══════════ Today’s panchang ══════════ -->
   <section class="panchang-today" aria-labelledby="panchang-title">
-    <h2 id="panchang-title" class="sr-only">Today's panchang</h2>
+    <h2 id="panchang-title" class="sr-only">Today’s panchang</h2>
     <div class="panchang-grid">
       <div class="panchang-primary">
         <p class="panchang-date" lang="en" aria-live="polite" id="panchang-np">Today, in Bikram Sambat</p>
@@ -353,13 +353,13 @@
             <div class="monogram geo" aria-hidden="true">ग</div>
             <div>
               <h3 id="proj-ngeo">nGeo</h3>
-              <div class="repo">namunaONE/nGeo — 339 commits</div>
+              <div class="repo">namunaONE/nGeo</div>
             </div>
           </div>
-          <p class="desc"><strong>Nepal's administrative divisions as an offline Dart package</strong> — 7 provinces, 77 districts, 753 local bodies, 6,743 wards. Official CBS/NSO codes (PDDPP), ISO 3166-2, Devanagari names, boundary polygons, district elevation stats.</p>
+          <p class="desc"><strong>Nepal’s administrative divisions as an offline Dart package</strong> — 7 provinces, 77 districts, 753 local bodies, 6,743 wards. Official CBS/NSO codes (PDDPP), ISO 3166-2, Devanagari names, boundary polygons, district elevation stats.</p>
           <p class="meta-line">MIT, data CC-BY-4.0, zero dependencies</p>
           <div class="install">
-            <code id="install-ngeo">dart pub add nepal_admin_api</code>
+            <code translate="no" id="install-ngeo">dart pub add nepal_admin_api</code>
             <button class="copy-btn" data-copy-target="install-ngeo" aria-label="Copy install command">Copy</button>
           </div>
           <p class="eco-line">Also generated for <span>TypeScript, Python, CSV, and GeoJSON</span> — source in <a href="https://github.com/namunaONE/nGeo/tree/main/bindings" rel="noopener">bindings/</a>, not yet on npm or PyPI.</p>
@@ -385,13 +385,13 @@
           <div class="monogram miti" aria-hidden="true">मिति</div>
           <div>
             <h3 id="proj-nmiti">nMiti</h3>
-            <div class="repo">namunaONE/nMiti — 17 commits</div>
+            <div class="repo">namunaONE/nMiti — machine-verified every 6 hours</div>
           </div>
         </div>
         <p class="desc"><strong>A machine-verified Bikram Sambat calendar commons</strong> — 109 verified core years (1975–2083 BS) + a labeled projection tail, a pure Dart BS ⇄ AD engine, and a static site that rebuilds every 6 hours at 00:00 Nepal Time.</p>
           <p class="meta-line">active — code MIT, data CC0, Dart 3</p>
         <div class="install">
-          <code id="install-nmiti">github.com/namunaONE/nMiti</code>
+          <code translate="no" id="install-nmiti">github.com/namunaONE/nMiti</code>
           <button class="copy-btn" data-copy-target="install-nmiti" aria-label="Copy repository URL">Copy</button>
         </div>
         <div class="card-links">
@@ -406,7 +406,7 @@
           <div class="monogram hisab" aria-hidden="true">हि</div>
           <div>
             <h3 id="proj-nhisab">nHisab</h3>
-            <div class="repo">namunaONE/nHisab — 21 commits</div>
+            <div class="repo">namunaONE/nHisab</div>
           </div>
         </div>
         <p class="desc"><strong>हिसाब — the ledger.</strong> An invite-only Flutter Web PWA for tracking loans and interest in Nepal: per-party statements, daily accrual (360/365-day), dual AD/BS dates, Nepal FY budgets, Excel/PDF exports. Backed by Supabase with RLS and an append-only audit trail — 49/49 tests passing.</p>
@@ -414,7 +414,7 @@
           <span class="pill pill-invite">Invite-only PWA</span>
         </div>
         <div class="install">
-          <code id="install-nhisab" style="font-size:0.72rem">Code public · the app is not open access</code>
+          <code translate="no" id="install-nhisab" style="font-size:0.72rem">Code public · the app is not open access</code>
           <button class="copy-btn" data-copy-target="install-nhisab" aria-label="Copy note">Copy</button>
         </div>
         <div class="card-links">
@@ -490,7 +490,7 @@
       </li>
     </ol>
 
-    <div class="tier-bar reveal" aria-label="CBS code attestation tiers">
+    <div class="tier-bar reveal" role="img" aria-label="CBS code attestation tiers">
       <div class="tier-bar-track" aria-hidden="true">
         <span class="tier-seg tier-verified" style="width:72.78%"></span>
         <span class="tier-seg tier-single" style="width:27.22%"></span>
@@ -517,14 +517,14 @@
     <div class="about-grid">
       <aside class="dictionary" aria-label="The name, defined">
         <div class="headword">namuna <span class="deva">नमूना</span></div>
-        <div class="pos">noun · Nepali · "na-MU-naa"</div>
+        <div class="pos">noun · Nepali · “na-MU-naa”</div>
         <ol>
           <li>A sample; a specimen kept for comparison.</li>
           <li>A pattern; an example worth copying.</li>
           <li>The reference you check everything else against.</li>
         </ol>
         <p class="why"><strong>Why the name?</strong> A नमूना is the sample you show to prove the work is real.
-        Namuna One is that sample, published — the datasets, the packages, the sites.
+        Namuna&nbsp;One is that sample, published — the datasets, the packages, the sites.
         <strong>Sharing is caring</strong> — so the samples are open.</p>
       </aside>
 
@@ -558,7 +558,7 @@
       <li><a class="link-row" href="https://github.com/namunaONE/nGeo/tree/main/bindings" rel="noopener"><span class="link-name">Bindings</span><span class="link-desc">JavaScript/TypeScript · Python · CSV · GeoJSON — generated from the same verified dataset</span><span class="link-arrow">→</span></a></li>
       <li><a class="link-row" href="https://namunaone.github.io/nGeo/" rel="noopener"><span class="link-name">Downloads</span><span class="link-desc">local_bodies.csv · districts.csv · provinces.csv · GeoJSON · meta.json</span><span class="link-arrow">→</span></a></li>
       <li><a class="link-row" href="https://namunaone.github.io/nGeo/" rel="noopener"><span class="link-name">nGeo site</span><span class="link-desc">Docs, API reference, Data Explorer, downloads (CSV/GeoJSON)</span><span class="link-arrow">→</span></a></li>
-      <li><a class="link-row" href="https://namunaone.github.io/nMiti/" rel="noopener"><span class="link-name">nMiti site</span><span class="link-desc">Today's date in Bikram Sambat — rebuilt every 6 hours</span><span class="link-arrow">→</span></a></li>
+      <li><a class="link-row" href="https://namunaone.github.io/nMiti/" rel="noopener"><span class="link-name">nMiti site</span><span class="link-desc">Today’s date in Bikram Sambat — rebuilt every 6 hours</span><span class="link-arrow">→</span></a></li>
       <li><a class="link-row" href="/llms.txt"><span class="link-name">llms.txt</span><span class="link-desc">Machine-readable index for AI assistants</span><span class="link-arrow">→</span></a></li>
     </ul>
   </section>
@@ -576,7 +576,7 @@
             <text x="32" y="44" text-anchor="middle" font-family="'Nirmala UI','Noto Serif Devanagari',serif" font-size="34" font-weight="700" fill="#0E4D5C">न</text>
             <circle cx="47" cy="17" r="5" fill="#C4552D"/>
           </svg>
-          Namuna One
+          Namuna&nbsp;One
         </div>
         <p class="footer-tag">Sharing is Caring. — verified open data and offline-first Dart tools for Nepal.</p>
       </div>
@@ -600,13 +600,13 @@
     </div>
     <p class="colophon">Set in system fonts · hand-written HTML &amp; CSS · no frameworks, no trackers, no build step · <span class="mono">site v1.4.0</span></p>
     <div class="footer-bottom">
-      <span>© <span id="footer-year">2026</span> Namuna One · Maintained by namunaONE under HyaMuji and Taire&nbsp;Bhai</span>
+      <span>© <span id="footer-year">2026</span> Namuna&nbsp;One · Maintained by namunaONE under HyaMuji and Taire&nbsp;Bhai</span>
       <span>Code MIT · Data CC-BY-4.0/CC0 · Not affiliated with the Government of Nepal · <a href="#main">Back to top ↑</a></span>
     </div>
   </div>
 </footer>
 
 <span class="sr-only" role="status" aria-live="polite" id="copy-status"></span>
-<script src="/assets/js/main.js?v=1.4.0" defer></script>
+<script src="/assets/js/main.js?v=1.4.1" defer></script>
 </body>
 </html>

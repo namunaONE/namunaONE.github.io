@@ -1,0 +1,12 @@
+/* A7 fixture — MUST PASS: motion with a reduced-motion fallback. */
+.spinner {
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  to { rotate: 1turn; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner { animation: none; }
+}

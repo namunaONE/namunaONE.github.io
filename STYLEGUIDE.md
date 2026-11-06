@@ -61,12 +61,13 @@ Assets: `assets/favicon.svg` (same mark) · `assets/og.svg` (1200×630 social ca
 | `--accent` / `--accent-strong` / `--accent-soft` | 500 / 600 / 50 | 300 / 300 / `#33201A` |
 | `--action-bg` / `--action-fg` / `--action-bg-hover` | 600 / white / 700 | 300 / `#08262B` / `#B3DCDC` |
 | `--code-bg` / `--code-fg` | stone-800 / `#D9E4E2` | `#0B1214` / `#CFDCDA` |
-| `--footer-bg` / `--footer-fg` / `--footer-muted` | stone-800 / stone-50 / `#9FB8B4` | `#0A1012` / `#F0EEE9` / `#8FA3A0` |
+| `--footer-bg` / `--footer-fg` / `--footer-fg-hover` / `--footer-muted` | stone-800 / stone-50 / `#FFFFFF` / `#9FB8B4` | `#0A1012` / `#F0EEE9` / `#FFFFFF` / `#8FA3A0` |
 | `--band-bg` / `--band-fg` / `--band-muted` | teal-700 / white / `#C3D4D1` | teal-800 / `#F2F8F6` / `#A8C4C0` |
 | `--good` / `--good-soft` | green-700 / 50 | green-300 / 900 |
 | `--warn` / `--warn-soft` | amber-700 / 50 | amber-300 / 900 |
 | `--focus` | teal-600 | teal-300 |
 | `--map-palika` / `--map-district` / `--map-province` | `#1C5B6B` / `#0E4D5C` / `#C4552D` | `#8FC7C7` / `#D7EEEC` / `#F0A583` |
+| `--tile-geo` / `--tile-miti` / `--tile-hisab` / `--tile-fg` | teal-600 / terra-500 / stone-800 / `#FFFFFF` | unchanged (fixed brand tiles never flip in dark mode) |
 
 Dark values activate via `@media (prefers-color-scheme: dark)`. Never test dark mode by adding a class — the OS drives it.
 

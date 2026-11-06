@@ -20,13 +20,14 @@ A single-page, dependency-free static site. No build step, no framework, no webf
 │   ├── og.svg            # 1200×630 social card source (hand-authored SVG)
 │   └── og.png            # Rendered social card — referenced by og:image
 ├── STYLEGUIDE.md         # Token + component + voice rules (system of record)
-├── .opencode/skills/namuna-guardian/  # Anti-slop skill: SKILL.md, gates, slop-scan + verify-live scripts
+├── .opencode/skills/namuna-guardian/  # Anti-slop skill: SKILL.md, gates, slop-scan + verify-live + self-test + gate-coverage
 ├── .opencode/skills/namuna-*/         # Elephant–Goldfish pipeline: brainstorm → draft → review → build → drift
 ├── .opencode/command/                 # Slash commands: /namuna-build <slug>, /namuna-review, …
 ├── .opencode/agent/goldfish.md        # Zero-context reviewer agent (P2)
 ├── .hallmark/            # Explicit waivers + build log (never silent)
 ├── docs/designs/         # Spec-first design docs (spec-driven flow)
-├── .github/workflows/guardian.yml  # CI: slop-scan + live link/figure verification
+├── scripts/              # Dev-only integrity checks: flow.mjs (specs/log/waivers), skill-lint.mjs
+├── .github/workflows/guardian.yml  # CI: gates + self-test + coverage + flow + lint + live verification
 ├── llms.txt              # Machine-readable index for AI assistants (llms.txt convention)
 ├── robots.txt            # Allow all + sitemap pointer
 ├── sitemap.xml           # Single URL
@@ -51,20 +52,31 @@ python -m http.server 8000
 
 Open the printed URL. Resize to mobile widths to check the hamburger menu and stacked cards.
 
+## Checks (run before you push)
+
+```powershell
+node .opencode/skills/namuna-guardian/scripts/slop-scan.mjs .       # static gates (hex, motion, layout, proofs, waivers)
+node .opencode/skills/namuna-guardian/scripts/self-test.mjs         # scanner fixture pairs
+node .opencode/skills/namuna-guardian/scripts/gate-coverage.mjs     # every gate's claim vs code
+node scripts/flow.mjs check                                         # spec states, ledgers, build log, waivers
+node scripts/skill-lint.mjs                                         # skill structure, paths, gate ranges
+node .opencode/skills/namuna-guardian/scripts/verify-live.mjs index.html  # links + figures (network)
+```
+
+All six run in CI (`.github/workflows/guardian.yml`); the Pages deploy is gated on them.
+
 ## Deploy (GitHub Pages)
 
 This repo is intended to be **`namunaONE/namunaONE.github.io`** — GitHub Pages serves a user/organisation site from the repository root on `main`:
 
 1. `git init` → add → commit
 2. `gh repo create namunaONE/namunaONE.github.io --public --source=. --push` (or create via the web UI and push)
-3. Settings → Pages → Source: **Deploy from a branch** → `main` / `root` (user sites do this automatically)
-4. Live at https://namunaone.github.io/ within a minute or two
-
-No GitHub Actions required — there is nothing to build.
+3. Settings → Pages → Source: **GitHub Actions** (one time; required by `guardian.yml`, which deploys only after the guard passes)
+4. Live at https://namunaone.github.io/ once the guard job is green
 
 ## Notes & decisions
 
-- **Design system v1.3** — three token layers (primitives → semantics → components); see [STYLEGUIDE.md](STYLEGUIDE.md). Components never use raw hex.
+- **Design system v1.3** — three token layers (primitives → semantics → components); see [STYLEGUIDE.md](STYLEGUIDE.md). Components never use raw hex — raw hex outside the token layer is a hard fail (A1, scanner-enforced). Fixed brand-tile tokens (`--tile-*`) and `--footer-fg-hover` are documented in the semantics table.
 - **Nepal point map** — `assets/nepal-mark.svg` is generated from the public nGeo GeoJSON bindings (`bindings/geojson`, v2.15.0): 753 palika centroids, 77 district anchors, 7 province rings (slowly breathing, reduced-motion aware). The SVG carries its own `prefers-color-scheme` styles; centroids are approximate (as nGeo documents). The 77-district index under it is generated from `districts.centroids.geojson` (Devanagari names included).
 - **Method section** — the real nGeo verification pipeline (inventory → verify → adjudicate → ship), including the 548 doubly-attested / 205 single-source / 0 invented tier split and the 72-of-72 conflict record.
 - **System fonts only** — `Fraunces`/`Inter` are named in the stacks but no files are shipped; everyone gets a tasteful local serif/sans. No third-party requests, no FOUT.

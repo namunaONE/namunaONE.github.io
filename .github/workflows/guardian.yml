@@ -1,12 +1,13 @@
 name: guardian
 
-# Namuna Design Guardian — anti-slop + live-source verification + gated deploy.
+# Namuna Design Guardian — anti-slop + integrity + live verification + gated deploy.
 #
-# Flow: guard (slop-scan A1–A18 · verify-live A19/A20) → deploy (GitHub Pages).
+# Flow: guard (static gates, scanner self-test, gate-coverage, flow check,
+#       skill lint, live checks) -> deploy (GitHub Pages).
 # PRs and the weekly cron run the guard only; pushes to main additionally
-# deploy, so a failing gate now means a no-deploy, not a tripwire.
+# deploy, so a failing gate means a no-deploy, not a tripwire.
 #
-# Requires: Settings → Pages → Build and deployment → Source = "GitHub Actions".
+# Requires: Settings -> Pages -> Build and deployment -> Source = "GitHub Actions".
 # (User sites with the .github.io name default to branch deploy; flip it once.)
 
 on:
@@ -35,8 +36,32 @@ jobs:
         with:
           node-version: 22
 
-      - name: Static floor (slop-scan)
+      - name: Static gates (slop-scan)
         run: node .opencode/skills/namuna-guardian/scripts/slop-scan.mjs .
+
+      - name: Scanner self-test (fixture pairs)
+        run: node .opencode/skills/namuna-guardian/scripts/self-test.mjs
+
+      - name: Gate coverage audit (claims vs code)
+        run: node .opencode/skills/namuna-guardian/scripts/gate-coverage.mjs
+
+      - name: Flow integrity (specs, build log, waivers)
+        run: node scripts/flow.mjs check
+
+      - name: Skill lint (structure, paths, gate ranges)
+        run: node scripts/skill-lint.mjs
+
+      - name: SLO check (error budget vs targets)
+        run: node scripts/slo-check.mjs
+
+      - name: Launch readiness (pre-ship checklist)
+        run: node scripts/launch-check.mjs
+
+      - name: Accessibility CI (A6 focus, A13 hero fold, A16 placeholders, contrast)
+        run: node scripts/a11y-check.mjs
+
+      - name: Performance budget (Lighthouse CI)
+        run: node scripts/lighthouse-check.mjs http://localhost:4174
 
       - name: Live verification (links A20 + figure drift A19)
         run: node .opencode/skills/namuna-guardian/scripts/verify-live.mjs index.html

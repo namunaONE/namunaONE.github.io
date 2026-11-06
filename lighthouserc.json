@@ -1,0 +1,45 @@
+{
+  "ci": {
+    "collect": {
+      "numberOfRuns": 3,
+      "url": [
+        "http://localhost:4174"
+      ],
+      "startServerCommand": "node _serve.mjs",
+      "startServerReadyPattern": "Preview on http://localhost:4174",
+      "settings": {
+        "preset": "desktop",
+        "throttling": {
+          "rttMs": 40,
+          "throughputKbps": 10240,
+          "requestLatencyMs": 0,
+          "downloadThroughputKbps": 0,
+          "uploadThroughputKbps": 0
+        },
+        "throttlingMethod": "provideNetwork",
+        "locale": "en-US"
+      }
+    },
+    "assert": {
+      "preset": "lighthouse:no-pwa",
+      "assertions": {
+        "categories:performance": ["error", { "minScore": 90 }],
+        "categories:accessibility": ["error", { "minScore": 90 }],
+        "categories:best-practices": ["error", { "minScore": 95 }],
+        "categories:seo": ["error", { "minScore": 95 }],
+        "largest-contentful-paint": ["error", { "maxNumericValue": 3000 }],
+        "cumulative-layout-shift": ["error", { "maxNumericValue": 0.1 }],
+        "total-blocking-time": ["error", { "maxNumericValue": 300 }],
+        "speed-index": ["error", { "maxNumericValue": 3500 }],
+        "interactive": ["error", { "maxNumericValue": 3000 }],
+        "first-contentful-paint": ["error", { "maxNumericValue": 2000 }],
+        "server-response-time": ["error", { "maxNumericValue": 500 }],
+        "dom-size": ["error", { "maxNumericValue": 800 }],
+        "render-blocking-resources": ["warn", { "maxNumericValue": 1000 }]
+      }
+    },
+    "upload": {
+      "target": "temporary-public-storage"
+    }
+  }
+}

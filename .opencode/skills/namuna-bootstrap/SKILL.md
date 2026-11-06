@@ -77,7 +77,7 @@ For each section on the page:
 - Touch targets ≥44px?
 
 ## Drift from Guardian rules
-- List of A1–A18 violations found in the existing code
+- List of A1-A20 violations found in the existing code
 - Waivers already in .hallmark/waivers.jsonl
 ```
 

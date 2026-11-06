@@ -44,8 +44,9 @@ These rules bind every output. A build that breaks one does not ship.
 4. Make the smallest deviation from the current design.
 5. Run `node .opencode/skills/namuna-guardian/scripts/slop-scan.mjs <path>`. Fix every FAIL.
 6. Run `node .opencode/skills/namuna-guardian/scripts/verify-live.mjs index.html` — external links (A20) + figure drift vs `bindings/meta.json` (A19). Fix every FAIL.
-7. Record any waiver explicitly with reason; never waive silently.
-8. Record decisions in `.hallmark/log.json` so consecutive builds diversify.
+7. When touching tooling or specs, run the integrity sweep: `self-test.mjs`, `gate-coverage.mjs`, `scripts/flow.mjs check`, `scripts/skill-lint.mjs`.
+8. Record any waiver explicitly with reason; never waive silently.
+9. Record decisions in `.hallmark/log.json` so consecutive builds diversify.
 
 ## Gates
 - **Hard FAIL** → build does not ship.

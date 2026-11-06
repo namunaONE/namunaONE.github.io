@@ -40,10 +40,12 @@ namuna-draft <slug>       (rewrite)  OR  namuna-brainstorm (recapture)  OR  namu
 ## References (shared truth)
 
 ```
-.opencode/skills/namuna-brainstorm/references/
+.opencode/skills/namuna-guardian/references/
 ├── design-system.md      # tokens, type, spacing, motion (from STYLEGUIDE.md)
 ├── provenance.md         # real / placeholder / absent material ledger
-├── anti-slop-gates.md    # A1–A18 pass/fail checks
+└── anti-slop-gates.md    # A1–A20 pass/fail checks + enforced-by matrix
+
+.opencode/skills/namuna-brainstorm/references/
 ├── macrostructures.md    # 21 page shapes (load only the one you pick)
 ├── themes/index.json     # 50 theme catalog (deal 3, pick 1)
 └── direction.md          # custom-run replacement for draw/layout/genre
@@ -58,7 +60,19 @@ namuna-draft <slug>       (rewrite)  OR  namuna-brainstorm (recapture)  OR  namu
 
 ## Relation to Guardian
 
-Guardian (`.opencode/skills/namuna-guardian/`) is the hard floor: tokens, provenance, anti-slop gates, scanner, waivers. Flow skills run **inside** Guardian's constraints — they never waive A1–A18 without an explicit waiver record.
+Guardian (`.opencode/skills/namuna-guardian/`) is the hard floor: tokens, provenance, anti-slop gates, scanner, waivers. Flow skills run **inside** Guardian's constraints — they never waive A1–A20 without an explicit waiver record.
+
+## Integrity checks (run in CI)
+
+- `node .opencode/skills/namuna-guardian/scripts/slop-scan.mjs .` — the static gates: hex, motion, layout, proofs, waivers (exact ids in the gates table)
+- `node .opencode/skills/namuna-guardian/scripts/self-test.mjs` — fixture pairs proving the scanner catches what it claims
+- `node .opencode/skills/namuna-guardian/scripts/gate-coverage.mjs` — audits every gate's "enforced by" claim
+- `node .opencode/skills/namuna-guardian/scripts/verify-live.mjs index.html` — link liveness (A20/A15) + figure drift (A19)
+- `node scripts/flow.mjs check` — spec states, material ledgers (A17), build log, waivers (A18)
+- `node scripts/skill-lint.mjs` — skill structure, path references, gate ranges
+- `node scripts/a11y-check.mjs` — accessibility CI: contrast, focus, headings, alt, touch targets
+- `node scripts/lighthouse-check.mjs` — performance budget CI: Lighthouse scores + metric budgets
+- `node scripts/launch-check.mjs` — pre-ship readiness: specs, waivers, evals, guardian, live
 
 ## Expansion
 

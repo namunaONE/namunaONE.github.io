@@ -1,0 +1,10 @@
+/* A1 fixture — MUST PASS: hex only inside the token layer; components consume tokens. */
+:root {
+  --brand: #0e4d5c;
+  --paper: #f5f4f2;
+}
+
+.banner {
+  color: var(--brand);
+  background: var(--paper);
+}

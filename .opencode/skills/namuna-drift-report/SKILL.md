@@ -39,7 +39,7 @@ For each category, compare spec vs code:
 | **Figures** | Every number matches spec + source? Any invented metric? |
 | **Motion** | Any animation not in spec? Reduced-motion fallback present? |
 | **Links** | All external links still resolve? |
-| **Guardian rules** | Any A1–A18 violation introduced since build? |
+| **Guardian rules** | Any A1-A20 violation introduced since build? |
 | **Waivers** | Any waiver used that isn't in `.hallmark/waivers.jsonl`? |
 
 ### 2. Generate the drift report

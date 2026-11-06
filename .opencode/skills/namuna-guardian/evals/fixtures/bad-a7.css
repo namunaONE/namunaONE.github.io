@@ -1,0 +1,8 @@
+/* A7 fixture — MUST FAIL: motion declared with no reduced-motion fallback. */
+.spinner {
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  to { rotate: 1turn; }
+}

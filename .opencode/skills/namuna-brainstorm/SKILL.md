@@ -24,7 +24,7 @@ Read, in order:
 - `.opencode/skills/namuna-guardian/references/design-system.md` — token primitives → semantics → components
 - `.opencode/skills/namuna-guardian/references/provenance.md` — real / placeholder / absent material ledger
 - The current page or component being changed (if any)
-- `.hallmark/log.json` or `.hallmark/log.jsonl` (if it exists) — prior builds for diversification
+- `.hallmark/log.json` (if it exists) - prior builds for diversification
 
 Output one **pre-flight block**: what is preserved from the existing system, what is introduced, and what material is still missing.
 

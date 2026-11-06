@@ -67,7 +67,7 @@ Read `spec.md` aloud. Could a developer who has never met the namunaONE team imp
 
 ### 4. Implementation readiness check
 
-Run `node .opencode/skills/namuna-guardian/scripts/slop-scan.mjs <target-files>` on the current code. Record any hard FAILs. The doc must not propose anything that violates the hard floor (A1–A18).
+Run `node .opencode/skills/namuna-guardian/scripts/slop-scan.mjs <target-files>` on the current code. Record any hard FAILs. The doc must not propose anything that violates the hard floor (A1-A20).
 
 ### 5. Judged gates
 

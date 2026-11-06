@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "note": "Every published figure on the site, with the live source that backs it. Checked by .opencode/skills/namuna-guardian/scripts/verify-live.mjs (A19): the page pattern must match, the registry value must match the pattern, and the live source must match the registry. severity: fail = blocks CI, warn = report only, info = registered (page presence only).",
+  "figures": [
+    { "id": "provinces", "value": "7", "page": "index.html", "pattern": "(\\d+)\\s+provinces", "severity": "fail", "source": { "type": "ngeo-meta", "path": "coverage.provinces" }, "note": "nGeo bindings/meta.json coverage" },
+    { "id": "districts", "value": "77", "page": "index.html", "pattern": "(\\d+)\\s+districts", "severity": "fail", "source": { "type": "ngeo-meta", "path": "coverage.districts" } },
+    { "id": "localBodies", "value": "753", "page": "index.html", "pattern": "(\\d+)\\s+local bodies", "severity": "fail", "source": { "type": "ngeo-meta", "path": "coverage.localBodies" } },
+    { "id": "heroPlaces", "value": "753", "page": "index.html", "pattern": "(\\d+)\\s+places\\.", "severity": "fail", "source": { "type": "ngeo-meta", "path": "coverage.localBodies" }, "note": "hero headline: '753 places. Every one coded.'" },
+    { "id": "wardsDeclared", "value": "6,743", "page": "index.html", "pattern": "([\\d,]+)\\s+declared wards", "severity": "fail", "format": "locale", "source": { "type": "ngeo-meta", "path": "coverage.declaredWards" } },
+    { "id": "wardsSubstantiated", "value": "6,697", "page": "index.html", "pattern": "([\\d,]+)\\s+substantiated", "severity": "fail", "format": "locale", "source": { "type": "ngeo-meta", "path": "coverage.substantiatedWards" } },
+    { "id": "doublyAttested", "value": "548", "page": "index.html", "pattern": "(\\d+)\\s+(?:codes\\s+)?doubly[- ]attested", "severity": "fail", "source": { "type": "ngeo-meta", "path": "coverage.doublyAttestedCodes" } },
+    { "id": "singleSource", "value": "205", "page": "index.html", "pattern": "(\\d+)\\s+single-source", "severity": "fail", "source": { "type": "ngeo-meta", "path": "coverage.singleSourceCodes" } },
+    { "id": "uncoded", "value": "0", "page": "index.html", "pattern": "(\\d+)\\s+uncoded", "severity": "fail", "source": { "type": "ngeo-meta-derive", "subtract": ["coverage.localBodies", "coverage.withCbsCode"] }, "note": "uncoded = localBodies - withCbsCode" },
+    { "id": "inventedZero", "value": "0", "page": "index.html", "pattern": "(\\d+)\\s+invented", "severity": "fail", "source": { "type": "ngeo-meta-derive", "subtract": ["coverage.localBodies", "coverage.withCbsCode"] } },
+    { "id": "codedRatio", "value": "753", "page": "index.html", "pattern": ">(\\d+)/753<", "severity": "fail", "source": { "type": "ngeo-meta", "path": "coverage.withCbsCode" }, "note": "rendered as 753/753" },
+    { "id": "bindingsVersion", "page": "index.html", "pattern": "bindings v([\\d.]+)", "severity": "fail", "source": { "type": "ngeo-meta", "path": "version" }, "note": "page stamp must equal the live meta.json version" },
+    { "id": "coreYears", "value": "109", "page": "index.html", "pattern": "(\\d+)\\s+verified core years", "severity": "fail", "source": { "type": "nmiti-core-rows" }, "note": "nMiti calendar_bs_core_1975_2083.csv data rows" },
+    { "id": "conflictsResolved", "value": "72", "page": "index.html", "pattern": "(\\d+)\\s+conflicts", "severity": "fail", "source": { "type": "text-contains", "url": "https://raw.githubusercontent.com/namunaONE/nGeo/main/README.md", "text": "72 conflicts, 72 resolved" }, "note": "nGeo README verification pipeline" },
+    { "id": "nhisabTests", "value": "49", "page": "index.html", "pattern": "([\\d]+)/49\\s+tests", "severity": "info", "source": { "type": "manual", "note": "nHisab CI: 49/49 tests" }, "note": "page-presence check only; verify in the nHisab repo when it changes" }
+  ]
+}
