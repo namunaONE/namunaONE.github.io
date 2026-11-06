@@ -27,3 +27,6 @@ build/
 
 # Local preview server (not part of the site)
 _serve.mjs
+
+# Scratch probes (one-off verification scripts)
+_*.mjs
