@@ -17,6 +17,7 @@ Namuna One is the umbrella home of the namunaONE "n*" suite — Nepali open data
 
 - [nMiti — Bikram Sambat calendar commons](https://github.com/namunaONE/nMiti)
   - Machine-verified BS dataset (109 core years 1975–2083 BS + labeled projection tail 2084–2100 BS), pure Dart BS⇄AD engine, static site rebuilt every 6 hours (00:00 NPT rollover for /today).
+  - Live pages: panchang.html, festivals.html, masa.html, muhurta.html, bhadra.html · daily JSON: https://namunaone.github.io/nMiti/api/v1/today.json
   - Site: https://namunaone.github.io/nMiti/ · License: MIT (code) · CC0-1.0 (data)
 
 - [nHisab — invite-only lending ledger PWA](https://github.com/namunaONE/nHisab)
