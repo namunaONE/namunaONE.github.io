@@ -61,7 +61,12 @@ const FAILS = [];
 const OKS = [];
 const WARNS = [];
 
-function fail(check, detail) { FAILS.push([check, detail]); console.log(`  \x1b[31m[FAIL]${check}\x1b[0m ${detail}`); }
+function fail(check, detail) {
+  FAILS.push([check, detail]);
+  console.log(`  \x1b[31m[FAIL]${check}\x1b[0m ${detail}`);
+  // GitHub annotation so the failure is readable on the run page even when the step log is truncated
+  console.log('::error title=lighthouse:' + check + '::' + String(detail).replace(/[\r\n]/g, ' ').slice(0, 200));
+}
 function warn(check, detail) { WARNS.push([check, detail]); console.log(`  \x1b[33m[WARN]${check}\x1b[0m ${detail}`); }
 function ok(check, detail) { OKS.push([check, detail]); console.log(`  \x1b[32m[ok]${check}\x1b[0m ${detail}`); }
 
