@@ -41,6 +41,7 @@ async function ensureServer() {
       detached: true,
       stdio: 'ignore'
     });
+    serverProc.on('error', function () { /* poll loop below reports the failure */ });
     serverProc.unref();
   } catch {
     fail('server-start', `could not start local server at ${URL} — is scripts/serve.mjs present?`);
@@ -84,7 +85,7 @@ function loadBudget() {
 function runLighthouse(url) {
   try {
     execSync(
-      `npx lighthouse "${url}" --output=json --output-path="${TMP_REPORT}" --quiet --preset=desktop`,
+      `npx --yes lighthouse "${url}" --output=json --output-path="${TMP_REPORT}" --quiet --preset=desktop`,
       { encoding: 'utf8', maxBuffer: 50 * 1024 * 1024, timeout: 180000, shell: true }
     );
     return JSON.parse(readFileSync(TMP_REPORT, 'utf8'));

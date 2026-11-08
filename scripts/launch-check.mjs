@@ -139,14 +139,26 @@ function checkEvals() {
 async function runGuardianChecks() {
   const { execSync } = await import('node:child_process');
 
+  /* Sub-check stdout is captured, not inherited. On failure, print its tail so
+     CI logs show WHY a sub-check failed instead of a bare "violated" line. */
+  function printSubOutput(out, e) {
+    const text = out !== null && out !== undefined
+      ? String(out)
+      : e && (e.stdout || e.stderr)
+        ? String(e.stdout || '') + '\n' + String(e.stderr || '')
+        : e && e.message ? String(e.message) : '';
+    if (!text.trim()) return;
+    const tail = text.trimEnd().split('\n').slice(-40).map(l => '    ' + l).join('\n');
+    console.log('    └─ sub-check output (tail):\n' + tail);
+  }
   // slop-scan
   try {
     const out = execSync('node .opencode/skills/namuna-guardian/scripts/slop-scan.mjs .', { encoding: 'utf8', maxBuffer: 10 * 1024 * 1024 });
     const m = /Summary: (\d+) hard fail\(s\)/.exec(out);
     const hardFails = Number(m?.[1] ?? 0);
     if (hardFails === 0) ok('guardian', 'slop-scan: 0 hard fails');
-    else fail('guardian', `slop-scan: ${hardFails} hard fail(s) — deploy blocked`);
-  } catch (e) { fail('guardian', `slop-scan exited with error`); }
+    else { printSubOutput(out); fail('guardian', `slop-scan: ${hardFails} hard fail(s) — deploy blocked`); }
+  } catch (e) { printSubOutput(null, e); fail('guardian', `slop-scan exited with error`); }
 
   // flow check
   try {
@@ -172,8 +184,8 @@ async function runGuardianChecks() {
     const m = /Live verification: \d+ ok, \d+ warn, (\d+) fail/.exec(out);
     const fails = Number(m?.[1] ?? 0);
     if (fails === 0) ok('guardian', 'verify-live: 0 link/figure fails');
-    else fail('guardian', `verify-live: ${fails} fail(s) — deploy blocked`);
-  } catch (e) { fail('guardian', `verify-live: network check failed`); }
+    else { printSubOutput(out); fail('guardian', `verify-live: ${fails} fail(s) — deploy blocked`); }
+  } catch (e) { printSubOutput(null, e); fail('guardian', `verify-live: network check failed`); }
 
   // accessibility (a11y)
   try {
@@ -183,9 +195,9 @@ async function runGuardianChecks() {
 
   // performance budget (lighthouse)
   try {
-    execSync('node scripts/lighthouse-check.mjs http://localhost:4174', { encoding: 'utf8', maxBuffer: 50 * 1024 * 1024, timeout: 180000 });
+    execSync('node scripts/lighthouse-check.mjs http://localhost:4174', { encoding: 'utf8', maxBuffer: 50 * 1024 * 1024, timeout: 300000 });
     ok('guardian', 'lighthouse-check: performance budgets met');
-  } catch (e) { fail('guardian', 'lighthouse-check: performance budget violated — deploy blocked'); }
+  } catch (e) { printSubOutput(null, e); fail('guardian', 'lighthouse-check: performance budget violated — deploy blocked'); }
 }
 
 /* ── 5 · Log integrity ───────────────────────────────────────────────────── */
