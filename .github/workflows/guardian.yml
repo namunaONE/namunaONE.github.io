@@ -54,9 +54,6 @@ jobs:
       - name: SLO check (error budget vs targets)
         run: node scripts/slo-check.mjs
 
-      - name: Launch readiness (pre-ship checklist)
-        run: node scripts/launch-check.mjs
-
       - name: Accessibility CI (A6 focus, A13 hero fold, A16 placeholders, contrast)
         run: node scripts/a11y-check.mjs
 
@@ -65,6 +62,9 @@ jobs:
 
       - name: Live verification (links A20 + figure drift A19)
         run: node .opencode/skills/namuna-guardian/scripts/verify-live.mjs index.html
+
+      - name: Launch readiness (pre-ship checklist; heavy sub-checks already ran as steps above)
+        run: node scripts/launch-check.mjs --ready-only
 
   deploy:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'

@@ -137,6 +137,9 @@ function checkEvals() {
 
 /* ── 4 · Guardian integrity (run the actual checks) ─────────────────────── */
 async function runGuardianChecks() {
+  // --ready-only: CI runs every sub-check as its own workflow step (full
+  // per-step logs); skip the duplicated in-process re-run.
+  if (process.argv.includes('--ready-only')) return;
   const { execSync } = await import('node:child_process');
 
   /* Sub-check stdout is captured, not inherited. On failure, print its tail so
@@ -149,6 +152,7 @@ async function runGuardianChecks() {
         : e && e.message ? String(e.message) : '';
     if (!text.trim()) return;
     const tail = text.trimEnd().split('\n').slice(-40).map(l => '    ' + l).join('\n');
+    console.log('::error title=launch-check sub-check::' + text.trim().split('\n')[0].slice(0, 200).replace(/[\r\n]/g, ' '));
     console.log('    └─ sub-check output (tail):\n' + tail);
   }
   // slop-scan
