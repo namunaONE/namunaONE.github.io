@@ -4,7 +4,11 @@
     "event": "build-backfill",
     "status": "built",
     "spec": "docs/designs/atlas-hero/spec.md",
-    "files": ["index.html", "assets/css/style.css", "assets/js/main.js"],
+    "files": [
+      "index.html",
+      "assets/css/style.css",
+      "assets/js/main.js"
+    ],
     "waivers": [],
     "timestamp": "2026-11-04T11:29:09+05:45",
     "reviewer": "namuna-review (goldfish, ship — per spec status log)",
@@ -15,8 +19,18 @@
     "event": "bootstrap",
     "status": "draft",
     "spec": "docs/designs/site/spec.md (not yet created — run namuna-bootstrap)",
-    "files": ["index.html", "404.html", "assets/css/style.css", "assets/js/main.js"],
-    "waivers": ["A9", "A10", "A11", "A14"],
+    "files": [
+      "index.html",
+      "404.html",
+      "assets/css/style.css",
+      "assets/js/main.js"
+    ],
+    "waivers": [
+      "A9",
+      "A10",
+      "A11",
+      "A14"
+    ],
     "timestamp": "2026-11-04T00:00:00Z",
     "reviewer": "none (baseline bootstrap)",
     "note": "Baseline bootstrap entry. Site predates spec-driven flow. Scanner: 0 hard fails, 4 waived (A9, A10, A11, A14). All waivers hardened with expires=2027-01-01."
@@ -25,33 +39,57 @@
     "slug": "bs-today",
     "status": "built",
     "spec": "docs/designs/bs-today/spec.md",
-    "files": ["index.html", "assets/css/style.css", "assets/js/main.js", ".opencode/skills/namuna-guardian/scripts/verify-live.mjs"],
+    "files": [
+      "index.html",
+      "assets/css/style.css",
+      "assets/js/main.js",
+      ".opencode/skills/namuna-guardian/scripts/verify-live.mjs"
+    ],
     "waivers": [],
     "timestamp": "2026-11-04T00:00:00Z",
     "reviewer": "namuna-review (goldfish, pass 7: ship)",
-    "sections": ["bs-today strip (inserted between numbers band and data section)"],
+    "sections": [
+      "bs-today strip (inserted between numbers band and data section)"
+    ],
     "signature": "live Bikram Sambat date from nMiti today.json, with evidence tier, as-of stamp, staleness guard, and graceful fallback"
   },
   {
     "slug": "v1-4-refresh",
     "status": "built",
     "spec": "docs/designs/v1-4-refresh/spec.md",
-    "files": ["index.html", "assets/css/style.css", "assets/js/main.js"],
+    "files": [
+      "index.html",
+      "assets/css/style.css",
+      "assets/js/main.js"
+    ],
     "waivers": [],
     "timestamp": "2026-11-04T00:00:00Z",
     "reviewer": "namuna-review (goldfish, pass 3: ship)",
-    "sections": ["numbers band (+ today line)", "method (+ tier-split bar)", "projects (nGeo alignment)", "footer (colophon v1.4.0)"],
+    "sections": [
+      "numbers band (+ today line)",
+      "method (+ tier-split bar)",
+      "projects (nGeo alignment)",
+      "footer (colophon v1.4.0)"
+    ],
     "signature": "tier-split bar 548/205/0 + Nepal now line + nGeo card alignment"
   },
   {
     "slug": "panchang-today",
     "status": "built",
     "spec": "docs/designs/panchang-today/spec.md",
-    "files": ["index.html", "assets/css/style.css", "assets/js/main.js"],
-    "waivers": ["A11 (main.js link-arrow convention)"],
+    "files": [
+      "index.html",
+      "assets/css/style.css",
+      "assets/js/main.js"
+    ],
+    "waivers": [
+      "A11 (main.js link-arrow convention)"
+    ],
     "timestamp": "2026-11-05T00:00:00Z",
     "reviewer": "namuna-review (goldfish, pass 4: fix → 4 fixes applied; build emitted)",
-    "sections": ["panchang strip (inserted between Hero and Numbers band)"],
+    "sections": [
+      "panchang strip (inserted between Hero and Numbers band)"
+    ],
     "signature": "live tithi from nMiti panchang engine, both udaya/madhyahna conventions, sunrise, stale fallback, verified link targets"
   },
   {
@@ -133,7 +171,9 @@
       ".github/workflows/guardian.yml",
       "scripts/launch-check.mjs"
     ],
-    "waivers": ["contrast (border on bg)"],
+    "waivers": [
+      "contrast (border on bg)"
+    ],
     "timestamp": "2026-11-06T00:00:00Z",
     "reviewer": "Phase D4 — automated accessibility CI",
     "note": "D4: added scripts/a11y-check.mjs — automated accessibility checks without a browser: contrast ratios (WCAG 4.5:1 text / 3:1 UI borders), html lang, title, image alt, heading hierarchy, skip link, ARIA validity, :focus-visible, outline:none, reduced-motion, forced-colors, touch targets (44px+). Border contrast (--line/--line-strong on --bg) waived explicitly (contrast gate, pattern 'border on bg', expires 2027-01-01) — hairline decorative borders below 3:1, to be darkened via spec-driven flow. Added a11y-check to CI guardian job and launch-check. Baseline: GO — 21 pass, 0 warn, 0 fail."
@@ -169,5 +209,22 @@
     "timestamp": "2026-11-06T00:00:00Z",
     "reviewer": "Phase D6 — postmortem process",
     "note": "D6: added blameless postmortem process. .hallmark/postmortems/README.md with index and process; TEMPLATE.md with 7 sections (what happened, impact, root cause, detection, resolution, prevention, follow-up actions). Updated docs/slos.md error budget table with postmortem-required column. Added postmortem readiness check to launch-check.mjs (blocks deploy if open postmortems exist). Baseline: no open postmortems."
+  },
+  {
+    "slug": "infra",
+    "event": "serve-fix",
+    "status": "done",
+    "spec": null,
+    "files": [
+      "scripts/serve.mjs",
+      "scripts/lighthouse-check.mjs",
+      "lighthouserc.json",
+      "scripts/launch-check.mjs",
+      ".github/workflows/guardian.yml"
+    ],
+    "waivers": [],
+    "timestamp": "2026-11-08T00:00:00Z",
+    "reviewer": "CI unblock — committed static server (guardian #7 postmortem fix)",
+    "note": "guardian #7 (eb18192, Nov 6) failed and blocked the Pages deploy: launch-check's lighthouse sub-check could not start a server in CI because _serve.mjs was a local-only scratch file that was never committed — and the same push gitignored _*.mjs, making it uncommittable. The local GO baselines (D5) ran where _serve.mjs existed. Fix: added scripts/serve.mjs (dependency-free node:http static server, port 4174, committed), pointed lighthouserc.json and scripts/lighthouse-check.mjs at it, and replaced the execSync server bootstrap with spawn (a server never exits; execSync would hang). Lesson: CI must never depend on uncommitted scratch files; the .gitignore pattern that excludes them makes it structural. Second bug found in the same mechanism while verifying the fix in CI: the ensureServer readiness probe called net.createConnection(host, port) with the arguments swapped — a string first argument is treated as an IPC socket path, so the probe failed even when the server was up (this is why run #8/#9 still failed at server-start after the server fix). Replaced the probe with an HTTP fetch. Also: launch-check now prints the tail of a failed sub-check output (previously execSync captured and discarded it, making CI failures undiagnosable), and npx --yes pins the Lighthouse install prompt. CI structure improvement (de-dup): the guard job previously ran a11y/lighthouse/verify-live twice per run — once inside launch-check (execSync-captured, invisible on failure) and once as separate steps. Now the standalone steps run first (full per-step logs) and launch-check runs --ready-only in CI, skipping the duplicated re-run (locally it still runs everything). Failed launch-check sub-checks also emit GitHub ::error:: annotations so the reason is readable on the run page even when step logs are truncated. Third finding (run #12): once the probe worked, Lighthouse itself failed in CI with \"waiting for dynamic debugging port\" — chrome-launcher starts Chrome without sandbox flags and it dies on the runner. Fix: --chrome-flags=\"--headless=new --no-sandbox --disable-dev-shm-usage\" (standard for CI; local runs keep working). Fourth finding (run #15, annotations): with Chrome launching, the budget step failed with error-level \"audit not found in report\" — lighthouserc.json asserted the \"interactive\" (TTI) audit, which was removed from Lighthouse v10+. Fix: dropped the interactive assertion (TBT already covers main-thread blocking); the rest of the budget is untouched. Fifth finding (run #15, annotations title \"lighthouse:dom-size\"): with the sandbox and TTI fixes in, Lighthouse ran and every budget passed except dom-size — the dom-size audit was replaced by the \"Optimize DOM size\" insight in Lighthouse 13 (Oct 2025) and no longer exists in the report at all. Removed the assertion; the insight variant has no comparable node-count numericValue, and the site DOM is small enough that the performance category budget (>= 90) already covers regression."
   }
 ]

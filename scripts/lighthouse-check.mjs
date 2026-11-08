@@ -4,7 +4,7 @@
    Usage: node scripts/lighthouse-check.mjs [url]
    Exit code: 0 all budgets met, 1 any budget violated.
 */
-import { execSync } from 'node:child_process';
+import { execSync, spawn } from 'node:child_process';
 import { readFileSync, existsSync, unlinkSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
@@ -13,16 +13,12 @@ const ROOT = process.cwd();
 const URL = process.argv[2] || 'http://localhost:4174';
 const CONFIG_PATH = join(ROOT, 'lighthouserc.json');
 const TMP_REPORT = join(tmpdir(), `namuna-lighthouse-${Date.now()}.json`);
-const SERVER_SCRIPT = join(ROOT, '_serve.mjs');
+const SERVER_SCRIPT = join(ROOT, 'scripts', 'serve.mjs');
 
 let serverProc = null;
 
 /* Ensure the local server is running for Lighthouse to crawl. */
 async function ensureServer() {
-  const [host, port] = URL.replace(/^https?:\/\//, '').split(':');
-  const p = parseInt(port, 10) || 80;
-  const h = JSON.stringify(host); // properly quoted for node -e
-
   // Try to reach the server via a raw HTTP fetch
   let reachable = false;
   try {
@@ -32,22 +28,28 @@ async function ensureServer() {
 
   if (reachable) return;
 
-  // server not reachable — start it
+  // server not reachable — start it. spawn (not execSync): a server never
+  // exits, so execSync would block the check until its timeout; spawn detaches
+  // and lets the wait loop below poll for readiness.
   try {
-    serverProc = execSync(`node "${SERVER_SCRIPT}"`, {
+    serverProc = spawn(process.execPath, [SERVER_SCRIPT], {
       cwd: ROOT,
       detached: true,
-      stdio: 'ignore',
+      stdio: 'ignore'
     });
+    serverProc.on('error', function () { /* poll loop below reports the failure */ });
+    serverProc.unref();
   } catch {
-    // If port is already in use, server is already up — that's fine
+    fail('server-start', `could not start local server at ${URL} — is scripts/serve.mjs present?`);
     return;
   }
 
-  // wait for it to come up
+  // wait for it to come up — fetch probe. The previous net.createConnection
+  // probe swapped its arguments: a string first arg is treated as an IPC
+  // socket path, so the probe failed even with the server up and running.
   for (let i = 0; i < 30; i++) {
     try {
-      execSync(`node -e "const {createConnection}=require('net');const s=createConnection(${h},${p});s.on('connect',()=>process.exit(0));s.on('error',()=>process.exit(1));setTimeout(()=>process.exit(1),3000);"`, { timeout: 5000 });
+      await fetch(`${URL}/`, { signal: AbortSignal.timeout(2000) });
       return;
     } catch { /* keep waiting */ }
     try { execSync('sleep 1', { timeout: 2000 }); } catch {}
@@ -59,7 +61,12 @@ const FAILS = [];
 const OKS = [];
 const WARNS = [];
 
-function fail(check, detail) { FAILS.push([check, detail]); console.log(`  \x1b[31m[FAIL]${check}\x1b[0m ${detail}`); }
+function fail(check, detail) {
+  FAILS.push([check, detail]);
+  console.log(`  \x1b[31m[FAIL]${check}\x1b[0m ${detail}`);
+  // GitHub annotation so the failure is readable on the run page even when the step log is truncated
+  console.log('::error title=lighthouse:' + check + '::' + String(detail).replace(/[\r\n]/g, ' ').slice(0, 900));
+}
 function warn(check, detail) { WARNS.push([check, detail]); console.log(`  \x1b[33m[WARN]${check}\x1b[0m ${detail}`); }
 function ok(check, detail) { OKS.push([check, detail]); console.log(`  \x1b[32m[ok]${check}\x1b[0m ${detail}`); }
 
@@ -81,14 +88,14 @@ function loadBudget() {
 function runLighthouse(url) {
   try {
     execSync(
-      `npx lighthouse "${url}" --output=json --output-path="${TMP_REPORT}" --quiet --preset=desktop`,
+      `npx --yes lighthouse "${url}" --output=json --output-path="${TMP_REPORT}" --quiet --preset=desktop --chrome-flags="--headless=new --no-sandbox --disable-dev-shm-usage"`,
       { encoding: 'utf8', maxBuffer: 50 * 1024 * 1024, timeout: 180000, shell: true }
     );
     return JSON.parse(readFileSync(TMP_REPORT, 'utf8'));
   } catch (e) {
     const stdout = e.stdout ? e.stdout.toString() : '';
     const stderr = e.stderr ? e.stderr.toString() : '';
-    throw new Error(`Lighthouse failed: ${e.message}\nstdout: ${stdout.slice(0, 500)}\nstderr: ${stderr.slice(0, 500)}`);
+    throw new Error(`Lighthouse failed: ${e.message}\nstdout: ${stdout.slice(0, 1000)}\nstderr: ${stderr.slice(0, 1000)}`);
   } finally {
     try { unlinkSync(TMP_REPORT); } catch { /* ignore */ }
   }

@@ -61,6 +61,8 @@ node .opencode/skills/namuna-guardian/scripts/gate-coverage.mjs     # every gate
 node scripts/flow.mjs check                                         # spec states, ledgers, build log, waivers
 node scripts/skill-lint.mjs                                         # skill structure, paths, gate ranges
 node .opencode/skills/namuna-guardian/scripts/verify-live.mjs index.html  # links + figures (network)
+node scripts/serve.mjs 4174 &                                        # static server for the budget check
+node scripts/lighthouse-check.mjs http://localhost:4174            # performance budget (auto-starts scripts/serve.mjs)
 ```
 
 All six run in CI (`.github/workflows/guardian.yml`); the Pages deploy is gated on them.
