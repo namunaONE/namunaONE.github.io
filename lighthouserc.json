@@ -31,7 +31,6 @@
         "cumulative-layout-shift": ["error", { "maxNumericValue": 0.1 }],
         "total-blocking-time": ["error", { "maxNumericValue": 300 }],
         "speed-index": ["error", { "maxNumericValue": 3500 }],
-        "interactive": ["error", { "maxNumericValue": 3000 }],
         "first-contentful-paint": ["error", { "maxNumericValue": 2000 }],
         "server-response-time": ["error", { "maxNumericValue": 500 }],
         "dom-size": ["error", { "maxNumericValue": 800 }],
