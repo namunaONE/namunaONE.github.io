@@ -65,7 +65,7 @@ function fail(check, detail) {
   FAILS.push([check, detail]);
   console.log(`  \x1b[31m[FAIL]${check}\x1b[0m ${detail}`);
   // GitHub annotation so the failure is readable on the run page even when the step log is truncated
-  console.log('::error title=lighthouse:' + check + '::' + String(detail).replace(/[\r\n]/g, ' ').slice(0, 200));
+  console.log('::error title=lighthouse:' + check + '::' + String(detail).replace(/[\r\n]/g, ' ').slice(0, 900));
 }
 function warn(check, detail) { WARNS.push([check, detail]); console.log(`  \x1b[33m[WARN]${check}\x1b[0m ${detail}`); }
 function ok(check, detail) { OKS.push([check, detail]); console.log(`  \x1b[32m[ok]${check}\x1b[0m ${detail}`); }
@@ -95,7 +95,7 @@ function runLighthouse(url) {
   } catch (e) {
     const stdout = e.stdout ? e.stdout.toString() : '';
     const stderr = e.stderr ? e.stderr.toString() : '';
-    throw new Error(`Lighthouse failed: ${e.message}\nstdout: ${stdout.slice(0, 500)}\nstderr: ${stderr.slice(0, 500)}`);
+    throw new Error(`Lighthouse failed: ${e.message}\nstdout: ${stdout.slice(0, 1000)}\nstderr: ${stderr.slice(0, 1000)}`);
   } finally {
     try { unlinkSync(TMP_REPORT); } catch { /* ignore */ }
   }
