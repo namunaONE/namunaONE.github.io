@@ -4,7 +4,7 @@
    Usage: node scripts/lighthouse-check.mjs [url]
    Exit code: 0 all budgets met, 1 any budget violated.
 */
-import { execSync } from 'node:child_process';
+import { execSync, spawn } from 'node:child_process';
 import { readFileSync, existsSync, unlinkSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
@@ -13,7 +13,7 @@ const ROOT = process.cwd();
 const URL = process.argv[2] || 'http://localhost:4174';
 const CONFIG_PATH = join(ROOT, 'lighthouserc.json');
 const TMP_REPORT = join(tmpdir(), `namuna-lighthouse-${Date.now()}.json`);
-const SERVER_SCRIPT = join(ROOT, '_serve.mjs');
+const SERVER_SCRIPT = join(ROOT, 'scripts', 'serve.mjs');
 
 let serverProc = null;
 
@@ -32,15 +32,18 @@ async function ensureServer() {
 
   if (reachable) return;
 
-  // server not reachable — start it
+  // server not reachable — start it. spawn (not execSync): a server never
+  // exits, so execSync would block the check until its timeout; spawn detaches
+  // and lets the wait loop below poll for readiness.
   try {
-    serverProc = execSync(`node "${SERVER_SCRIPT}"`, {
+    serverProc = spawn(process.execPath, [SERVER_SCRIPT], {
       cwd: ROOT,
       detached: true,
-      stdio: 'ignore',
+      stdio: 'ignore'
     });
+    serverProc.unref();
   } catch {
-    // If port is already in use, server is already up — that's fine
+    fail('server-start', `could not start local server at ${URL} — is scripts/serve.mjs present?`);
     return;
   }
 

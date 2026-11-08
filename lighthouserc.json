@@ -5,7 +5,7 @@
       "url": [
         "http://localhost:4174"
       ],
-      "startServerCommand": "node _serve.mjs",
+      "startServerCommand": "node scripts/serve.mjs",
       "startServerReadyPattern": "Preview on http://localhost:4174",
       "settings": {
         "preset": "desktop",
