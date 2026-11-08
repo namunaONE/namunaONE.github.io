@@ -19,10 +19,6 @@ let serverProc = null;
 
 /* Ensure the local server is running for Lighthouse to crawl. */
 async function ensureServer() {
-  const [host, port] = URL.replace(/^https?:\/\//, '').split(':');
-  const p = parseInt(port, 10) || 80;
-  const h = JSON.stringify(host); // properly quoted for node -e
-
   // Try to reach the server via a raw HTTP fetch
   let reachable = false;
   try {
@@ -48,10 +44,12 @@ async function ensureServer() {
     return;
   }
 
-  // wait for it to come up
+  // wait for it to come up — fetch probe. The previous net.createConnection
+  // probe swapped its arguments: a string first arg is treated as an IPC
+  // socket path, so the probe failed even with the server up and running.
   for (let i = 0; i < 30; i++) {
     try {
-      execSync(`node -e "const {createConnection}=require('net');const s=createConnection(${h},${p});s.on('connect',()=>process.exit(0));s.on('error',()=>process.exit(1));setTimeout(()=>process.exit(1),3000);"`, { timeout: 5000 });
+      await fetch(`${URL}/`, { signal: AbortSignal.timeout(2000) });
       return;
     } catch { /* keep waiting */ }
     try { execSync('sleep 1', { timeout: 2000 }); } catch {}
