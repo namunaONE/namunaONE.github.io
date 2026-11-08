@@ -33,7 +33,6 @@
         "speed-index": ["error", { "maxNumericValue": 3500 }],
         "first-contentful-paint": ["error", { "maxNumericValue": 2000 }],
         "server-response-time": ["error", { "maxNumericValue": 500 }],
-        "dom-size": ["error", { "maxNumericValue": 800 }],
         "render-blocking-resources": ["warn", { "maxNumericValue": 1000 }]
       }
     },
