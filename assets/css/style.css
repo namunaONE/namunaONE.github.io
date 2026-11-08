@@ -665,6 +665,15 @@ body.menu-open .mobile-menu { display: block; }
   margin: 0;
 }
 
+.panchang-limbs,
+.panchang-festival {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
 .panchang-provenance { margin: 0; }
 
 .panchang-tithi-link {
@@ -1431,6 +1440,7 @@ summary,
   .tier-bar-track { border-width: 2px; }
   .tier-dot { border-width: 2px; }
   .panchang-source { color: var(--ink-soft); }
+  .panchang-limbs, .panchang-festival { color: var(--ink-soft); }
 }
 
 @media (forced-colors: active) {
@@ -1455,6 +1465,7 @@ summary,
   .tier-note a { color: LinkText; }
   .panchang-today { border: 1px solid CanvasText; background: Canvas; color: CanvasText; }
   .panchang-source a { color: LinkText; }
+  .panchang-limbs, .panchang-festival { color: CanvasText; }
 }
 
 @media print {
