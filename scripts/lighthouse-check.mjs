@@ -88,7 +88,7 @@ function loadBudget() {
 function runLighthouse(url) {
   try {
     execSync(
-      `npx --yes lighthouse "${url}" --output=json --output-path="${TMP_REPORT}" --quiet --preset=desktop`,
+      `npx --yes lighthouse "${url}" --output=json --output-path="${TMP_REPORT}" --quiet --preset=desktop --chrome-flags="--headless=new --no-sandbox --disable-dev-shm-usage"`,
       { encoding: 'utf8', maxBuffer: 50 * 1024 * 1024, timeout: 180000, shell: true }
     );
     return JSON.parse(readFileSync(TMP_REPORT, 'utf8'));
