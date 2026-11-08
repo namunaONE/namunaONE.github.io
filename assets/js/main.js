@@ -277,6 +277,54 @@
     if (mad && mad !== data.panchang.tithi.udaya.name) sent += ' → ' + mad;
     tithi.textContent = sent;
 
+    // Limbs — nakshatra, yoga, karana, lunar masa (optional elements, never in the guard)
+    var limbsEl = document.getElementById('panchang-limbs');
+    if (limbsEl) {
+      var limbs = [];
+      var nk = data.panchang.nakshatra && data.panchang.nakshatra.udaya;
+      if (nk && nk.name) {
+        var nkEnd = nk.ends_at ? timeNPT(nk.ends_at) : '';
+        limbs.push(nk.name + (nkEnd ? ' ends ' + nkEnd : ''));
+      }
+      var yg = data.panchang.yoga && data.panchang.yoga.udaya;
+      if (yg && yg.name) limbs.push(yg.name);
+      var kr = data.panchang.karana && data.panchang.karana.udaya;
+      if (kr && kr.name) {
+        var krTxt = kr.name;
+        var krMad = data.panchang.karana.madhyahna && data.panchang.karana.madhyahna.name;
+        if (krMad && krMad !== kr.name) krTxt += ' → ' + krMad + ' at noon';
+        limbs.push(krTxt);
+      }
+      if (data.masa && data.masa.is_adhika) limbs.push('Adhika ' + data.masa.month_name + ' masa');
+      if (data.masa && data.masa.is_kshaya) limbs.push('Kshaya ' + data.masa.month_name + ' masa');
+      if (limbs.length) {
+        limbsEl.textContent = limbs.join(', ');
+        limbsEl.hidden = false;
+      }
+    }
+
+    // Festival line — today's observances + the next festival (optional element)
+    var festEl = document.getElementById('panchang-festival');
+    if (festEl) {
+      var festBits = [];
+      var festToday = data.festivals && data.festivals.today;
+      if (festToday && festToday.length) {
+        var festNames = [];
+        for (var fi = 0; fi < festToday.length; fi++) {
+          if (festToday[fi] && festToday[fi].name_en) festNames.push(festToday[fi].name_en);
+        }
+        if (festNames.length) festBits.push('Today – ' + festNames.join(', '));
+      }
+      var festNext = data.festivals && data.festivals.next_festival;
+      if (festNext && festNext.name_en && festNext.ad_date) {
+        festBits.push('Next – ' + festNext.name_en + ', ' + festNext.ad_date);
+      }
+      if (festBits.length) {
+        festEl.textContent = festBits.join(' — ');
+        festEl.hidden = false;
+      }
+    }
+
     // Source line — fresh built nodes only
     src.textContent = 'Source: nMiti panchang engine — engine-computed at build time, as of ' + asOfStamp(data.generated_at_utc) + ' — ';
     var acc = document.createElement('a');
